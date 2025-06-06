@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Marketing Fundamentals - Advanced Language & Computer School</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Theme Variables */
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #fff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --accent-color: #ed8936;
+            --accent-light: rgba(237, 137, 54, 0.1);
+            --border-color: #e2e8f0;
+            --card-bg: #fff;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            --footer-bg: #2d3748;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --bottom-nav-bg: #fff;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark Theme */
+        html[data-theme='dark'] {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --accent-color: #f6ad55;
+            --accent-light: rgba(246, 173, 85, 0.2);
+            --border-color: #4a5568;
+            --card-bg: #2d3748;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            --footer-bg: #171923;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(26, 32, 44, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --bottom-nav-bg: #1a202c;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--accent-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+
+        .btn-lg {
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .theme-toggle i {
+            font-size: 18px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), var(--accent-light));
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), var(--accent-light));
+            bottom: -100px;
+            left: -100px;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            background: var(--accent-light);
+            color: var(--accent-color);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .badge i {
+            margin-right: 8px;
+        }
+
+        /* Course Overview */
+        .course-overview {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .overview-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .overview-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .overview-features {
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon {
+            background: var(--accent-light);
+            color: var(--accent-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .feature-text p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .overview-image {
+            position: relative;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .overview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Curriculum Section */
+        .curriculum {
+            padding: 80px 0;
+        }
+
+        .curriculum-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .module {
+            margin-bottom: 40px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .module:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-header {
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .module-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .module.active .module-content {
+            display: block;
+        }
+
+        .module-content ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        .module-content li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .module-content p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Instructors Section */
+        .instructors {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .instructor-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .instructor-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .instructor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instructor-info {
+            padding: 20px;
+        }
+
+        .instructor-info h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .instructor-info p.position {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .instructor-info p.bio {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+        }
+
+        .pricing-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            width: 300px;
+            text-align: center;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-header {
+            background: var(--accent-light);
+            padding: 20px;
+            color: var(--text-primary);
+        }
+
+        .pricing-card.featured .pricing-header {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .pricing-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        .pricing-price span {
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .pricing-content {
+            padding: 20px;
+        }
+
+        .pricing-features {
+            margin-bottom: 20px;
+        }
+
+        .pricing-feature {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .pricing-feature:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-feature i {
+            color: var(--accent-color);
+            margin-right: 5px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .testimonial-content {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 60px;
+            color: var(--accent-color);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-content p {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .faq-question i {
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #dd6b20 100%);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--accent-color);
+            border-color: white;
+        }
+
+        .cta .btn:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 100px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+
+        .footer-text {
+            color: var(--footer-secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--footer-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #4a5568;
+            color: var(--footer-secondary);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bottom-nav-bg);
+            box-shadow: var(--bottom-nav-shadow);
+            z-index: 999;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .bottom-nav-links {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .bottom-nav-item {
+            text-align: center;
+        }
+
+        .bottom-nav-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .bottom-nav-icon i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .bottom-nav-icon span {
+            font-size: 12px;
+        }
+
+        .bottom-nav-icon:hover,
+        .bottom-nav-icon.active {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-image {
+                height: 300px;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 250px;
+                height: 100vh;
+                background: var(--bg-primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                font-size: 24px;
+            }
+
+            .hero {
+                text-align: center;
+                padding-top: 80px;
+                height: auto;
+                min-height: 60vh;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .hero-badges {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+
+            .pricing-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="../advanced.html" class="logo">Advanced<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="../advanced.html">Home</a></li>
+                    <li><a href="../courses.html">Courses</a></li>
+                    <li><a href="../advanced.html#features">Features</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../advanced.html#contact">Contact</a></li>
+                </ul>
+                <div class="header-right">
+                    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="course-hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Digital <span>Marketing</span> Fundamentals</h1>
+                <p>Master the essential strategies and tools of digital marketing to grow your brand, reach your target
+                    audience, and drive measurable results in today's competitive online landscape.</p>
+
+                <div class="hero-badges">
+                    <div class="badge"><i class="fas fa-clock"></i> 10 Weeks</div>
+                    <div class="badge"><i class="fas fa-signal"></i> Beginner to Intermediate</div>
+                    <div class="badge"><i class="fas fa-users"></i> Limited to 20 Students</div>
+                    <div class="badge"><i class="fas fa-certificate"></i> Certificate Included</div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="enroll.html" class="btn btn-lg">Enroll Now</a>
+                    <a href="#curriculum" class="btn btn-secondary btn-lg">View Curriculum</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Overview Section -->
+    <section id="overview" class="course-overview visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Overview</h2>
+                <p>Everything you need to know about our comprehensive Digital Marketing program</p>
+            </div>
+
+            <div class="overview-grid">
+                <div class="overview-content">
+                    <h2>Launch Your Digital Marketing Career</h2>
+                    <p>This 10-week course will equip you with the knowledge, skills, and practical experience needed to
+                        create and execute effective digital marketing campaigns. Whether you're looking to market your
+                        own business, advance in your current role, or start a career in digital marketing, our
+                        curriculum provides a solid foundation across all key digital channels.</p>
+
+                    <div class="overview-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Search Engine Optimization (SEO)</h4>
+                                <p>Learn how to optimize websites to rank higher in search engines, drive organic
+                                    traffic, and implement effective keyword strategies that connect with your target
+                                    audience.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-ad"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Paid Advertising</h4>
+                                <p>Master the fundamentals of pay-per-click (PPC) advertising across Google, social
+                                    media platforms, and display networks to create high-converting campaigns with
+                                    measurable ROI.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-hashtag"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Social Media Marketing</h4>
+                                <p>Develop strategies for building brand presence and engagement across major social
+                                    platforms, creating compelling content, and measuring social media campaign
+                                    effectiveness.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Analytics & Data-Driven Marketing</h4>
+                                <p>Learn to set up tracking, analyze campaign performance, and make data-informed
+                                    decisions to continuously improve your marketing efforts and maximize ROI.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#curriculum" class="btn">Explore Curriculum</a>
+                </div>
+
+                <div class="overview-image">
+                    <img src="https://placeholder.svg?height=400&width=600" alt="Digital Marketing Course">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Section -->
+    <section id="curriculum" class="curriculum visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Curriculum</h2>
+                <p>A comprehensive learning path designed to build your digital marketing expertise from the ground up
+                </p>
+            </div>
+
+            <div class="curriculum-container">
+                <div class="module active">
+                    <div class="module-header">
+                        <div class="module-title">Module 1: Digital Marketing Fundamentals</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Understand the digital marketing landscape and build a foundation for success.</p>
+                        <ul>
+                            <li>Introduction to digital marketing and its evolution</li>
+                            <li>Key digital marketing channels and their roles</li>
+                            <li>Understanding the customer journey and sales funnel</li>
+                            <li>Creating buyer personas and audience targeting</li>
+                            <li>Setting SMART marketing objectives</li>
+                            <li>Project: Develop a digital marketing strategy for a business case study</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 2: Website Optimization & SEO</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn how to optimize websites for search engines and user experience.</p>
+                        <ul>
+                            <li>SEO fundamentals and search engine algorithms</li>
+                            <li>Keyword research and competitive analysis</li>
+                            <li>On-page SEO techniques and content optimization</li>
+                            <li>Technical SEO and site structure</li>
+                            <li>Local SEO strategies for businesses</li>
+                            <li>Project: Conduct an SEO audit and create an optimization plan</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 3: Content Marketing</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Master the art of creating valuable content that attracts and engages your target audience.
+                        </p>
+                        <ul>
+                            <li>Content marketing strategy and planning</li>
+                            <li>Creating different types of content (blogs, videos, infographics, etc.)</li>
+                            <li>Content distribution and promotion</li>
+                            <li>Storytelling techniques for brands</li>
+                            <li>Content calendars and management tools</li>
+                            <li>Project: Develop a content marketing plan with sample content pieces</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 4: Social Media Marketing</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Build effective strategies for major social media platforms.</p>
+                        <ul>
+                            <li>Platform-specific strategies (Facebook, Instagram, LinkedIn, Twitter, TikTok)</li>
+                            <li>Creating engaging social media content</li>
+                            <li>Community management and engagement</li>
+                            <li>Social media scheduling and management tools</li>
+                            <li>Measuring social media performance</li>
+                            <li>Project: Create a social media campaign for a specific platform</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 5: Pay-Per-Click Advertising</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn to create and manage effective paid advertising campaigns.</p>
+                        <ul>
+                            <li>Google Ads fundamentals (Search, Display, Video)</li>
+                            <li>Social media advertising (Facebook, Instagram, LinkedIn)</li>
+                            <li>Campaign structure and targeting options</li>
+                            <li>Ad copywriting and creative best practices</li>
+                            <li>Bid management and budget optimization</li>
+                            <li>Project: Set up and optimize a Google Ads campaign</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 6: Email Marketing</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Develop effective email marketing campaigns that convert.</p>
+                        <ul>
+                            <li>Email marketing strategy and list building</li>
+                            <li>Email design and copywriting</li>
+                            <li>Automation and drip campaigns</li>
+                            <li>A/B testing and optimization</li>
+                            <li>Deliverability and compliance (GDPR, CAN-SPAM)</li>
+                            <li>Project: Create an email marketing sequence for a customer journey</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 7: Analytics & Data-Driven Marketing</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn to measure, analyze, and optimize your marketing efforts.</p>
+                        <ul>
+                            <li>Google Analytics setup and configuration</li>
+                            <li>Key performance indicators (KPIs) for different channels</li>
+                            <li>Creating custom reports and dashboards</li>
+                            <li>Conversion tracking and attribution models</li>
+                            <li>Data analysis for marketing optimization</li>
+                            <li>Project: Set up analytics tracking and create a performance dashboard</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 8: Conversion Rate Optimization</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Optimize your digital assets to increase conversions and ROI.</p>
+                        <ul>
+                            <li>CRO principles and methodology</li>
+                            <li>User experience (UX) and landing page optimization</li>
+                            <li>A/B testing and experimentation</li>
+                            <li>Persuasive copywriting techniques</li>
+                            <li>Tools for CRO and testing</li>
+                            <li>Project: Conduct a CRO audit and create an optimization plan</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 9: Mobile Marketing</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Develop strategies for the mobile-first digital world.</p>
+                        <ul>
+                            <li>Mobile marketing fundamentals and trends</li>
+                            <li>Mobile SEO and responsive design</li>
+                            <li>App store optimization (ASO)</li>
+                            <li>SMS and push notification marketing</li>
+                            <li>Location-based marketing strategies</li>
+                            <li>Project: Create a mobile marketing strategy for a business</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 10: Digital Marketing Strategy & Final Project</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Bring together all aspects of digital marketing into a comprehensive strategy.</p>
+                        <ul>
+                            <li>Integrated digital marketing planning</li>
+                            <li>Budget allocation and resource planning</li>
+                            <li>Marketing technology stack and tools</li>
+                            <li>Measuring marketing ROI</li>
+                            <li>Future trends in digital marketing</li>
+                            <li>Final Project: Develop a comprehensive digital marketing plan for a real business</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructors Section -->
+    <section id="instructors" class="instructors visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Your Instructors</h2>
+                <p>Learn from experienced digital marketing professionals with proven track records</p>
+            </div>
+
+            <div class="overview-grid">
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Sarah Johnson">
+                    </div>
+                    <div class="instructor-info">
+                        <h3>Sarah Johnson</h3>
+                        <p class="position">Lead Instructor, Digital Marketing Strategist</p>
+                        <p class="bio">Sarah has over 12 years of experience in digital marketing, having worked with
+                            Fortune 500 companies and startups alike. She previously led marketing teams at major tech
+                            companies and now consults for businesses while sharing her expertise through teaching.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Marcus Chen">
+                    </div>
+                    <div class="instructor-info">
+                        <h3>Marcus Chen</h3>
+                        <p class="position">SEO & PPC Specialist</p>
+                        <p class="bio">Marcus specializes in search marketing with 8 years of experience managing
+                            multi-million dollar advertising budgets. He's a Google Ads and Analytics certified
+                            professional who has helped numerous businesses achieve significant growth through search
+                            optimization.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Pricing</h2>
+                <p>Flexible payment options to fit your budget</p>
+            </div>
+
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Basic</div>
+                        <div class="pricing-price">$999 <span>one-time payment</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Full course access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Course materials</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Certificate of completion</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Community access</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> 1-on-1 coaching</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Campaign reviews</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Job placement assistance</div>
+                        </div>
+                        <a href="../enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Professional</div>
+                        <div class="pricing-price">$1,499 <span>one-time payment</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Full course access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Course materials</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Certificate of completion</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Community access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> 1-on-1 coaching (3 sessions)</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Campaign reviews</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Job placement assistance</div>
+                        </div>
+                        <a href="../enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Payment Plan</div>
+                        <div class="pricing-price">$399 <span>per month for 3 months</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Full course access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Course materials</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Certificate of completion</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Community access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> 1-on-1 coaching (1 session)</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Campaign reviews</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Job placement assistance</div>
+                        </div>
+                        <a href="enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Student Testimonials</h2>
+                <p>Hear what our graduates have to say about their digital marketing journey</p>
+            </div>
+
+            <div class="testimonial-container">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"This course completely transformed my marketing approach. As a small business owner, I was
+                            struggling to make an impact online. The practical strategies I learned helped me increase
+                            my website traffic by 150% and double my conversion rate within just three months of
+                            completing the course."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="Emily Rodriguez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Emily Rodriguez</h4>
+                            <p>Owner, Boutique Clothing Store</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I transitioned from traditional marketing to digital with this course, and it was the best
+                            career decision I've made. The instructors break down complex concepts into actionable
+                            steps, and the hands-on projects gave me real-world experience. I landed a digital marketing
+                            specialist role before even finishing the course!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="Jason Kim">
+                        </div>
+                        <div class="author-info">
+                            <h4>Jason Kim</h4>
+                            <p>Digital Marketing Specialist, Tech Startup</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The ROI on this course has been incredible. I applied the PPC and analytics techniques to
+                            our company's campaigns and was able to reduce our cost per acquisition by 40% while
+                            increasing lead quality. My boss was so impressed that I received a promotion to marketing
+                            manager within six months."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="Sophia Martinez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sophia Martinez</h4>
+                            <p>Marketing Manager, SaaS Company</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our Digital Marketing Fundamentals course</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        <span>Do I need prior marketing experience to take this course?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, this course is designed to accommodate beginners with no prior marketing experience. We
+                            start with the fundamentals and gradually progress to more advanced concepts. However, if
+                            you do have some marketing background, you'll still benefit from the digital-specific
+                            strategies, tools, and hands-on projects that will help you apply your knowledge in the
+                            digital realm.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Will I need to purchase any additional tools or software?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Most of the tools we use in the course offer free versions or trials that are sufficient for
+                            learning purposes. These include Google Analytics, Google Ads (with test accounts), social
+                            media platforms, and various free SEO tools. We provide a list of recommended tools before
+                            the course starts, but purchasing premium versions is optional and not required to complete
+                            the course successfully.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How hands-on is this course?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>This course is extremely hands-on. Each module includes practical exercises and projects that
+                            apply the concepts you've learned. You'll create real campaigns, develop marketing
+                            strategies, analyze data, and optimize based on results. By the end of the course, you'll
+                            have a portfolio of projects that demonstrate your skills to potential employers or clients.
+                            We believe in learning by doing, not just theory.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is the course content updated regularly?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, digital marketing is a rapidly evolving field, and our curriculum is updated quarterly
+                            to reflect the latest platform changes, algorithm updates, and industry best practices. When
+                            you enroll, you get lifetime access to the course materials, including all future updates.
+                            Our instructors are active practitioners who bring real-world, current examples to their
+                            teaching.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How much time should I dedicate to this course each week?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We recommend dedicating 8-10 hours per week to get the most out of this course. This includes
+                            2-3 hours of video lessons, 2-3 hours for assignments and projects, and 2-4 hours for
+                            practice and experimentation with the tools and platforms. The course is designed to be
+                            flexible, so you can adjust your schedule as needed, but consistent engagement will lead to
+                            the best results.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Will this course help me get a job in digital marketing?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, this course is designed with employability in mind. The curriculum covers the most
+                            in-demand digital marketing skills that employers are looking for. The Professional plan
+                            includes job placement assistance, resume reviews, and interview preparation. Additionally,
+                            the portfolio of projects you'll build throughout the course will demonstrate your
+                            capabilities to potential employers. Many of our graduates have successfully transitioned
+                            into digital marketing roles or advanced in their current positions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta visible">
+        <div class="container">
+            <h2>Ready to Master Digital Marketing?</h2>
+            <p>Join our next cohort and take the first step toward becoming a skilled digital marketer. Limited spots
+                available!</p>
+            <a href="enroll.html" class="btn btn-lg">Enroll Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-logo">Advanced<span>.</span></h3>
+                    <p class="footer-text">Advanced is a premier institution offering cutting-edge courses in digital
+                        marketing, languages, and computer science.</p>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../advanced.html">Home</a></li>
+                        <li><a href="../courses.html">Courses</a></li>
+                        <li><a href="../advanced.html#features">Features</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../advanced.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="digital-marketing.html">Digital Marketing</a></li>
+                        <li><a href="webdev.html">Web Development</a></li>
+                        <li><a href="mandarin.html">Mandarin Chinese</a></li>
+                        <li><a href="python.html">Python Programming</a></li>
+                        <li><a href="data-science.html">Data Science</a></li>
+                        <li><a href="technical.html">Technical Writing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="../privacy.html">Privacy Policy</a></li>
+                        <li><a href="../privacy.html">Terms & Conditions</a></li>
+                        <li><a href="../documentation&sup.html">Documentation</a></li>
+                        <li><a href="../documentation&sup.html">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Advanced Language & Computer School. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-links">
+            <div class="bottom-nav-item">
+                <a href="../advanced.html" class="bottom-nav-icon">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../courses.html" class="bottom-nav-icon active">
+                    <i class="fas fa-book"></i>
+                    <span>Courses</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../about.html" class="bottom-nav-icon">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../advanced.html#contact" class="bottom-nav-icon">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or use device preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Set initial theme
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        } else if (prefersDark) {
+            htmlElement.setAttribute('data-theme', 'dark');
+            updateThemeIcon('dark');
+        }
+
+        // Toggle theme function
+        function toggleTheme() {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        // Update theme icon
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-moon';
+            } else {
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        // Add event listener to theme toggle button
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Sticky Header
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Module Toggle
+        const moduleHeaders = document.querySelectorAll('.module-header');
+
+        moduleHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const module = header.parentElement;
+                module.classList.toggle('active');
+            });
+        });
+
+        // FAQ Toggle
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initialize page with all sections visible
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('visible');
+        });
+    </script>
+</body>
+
+</html>

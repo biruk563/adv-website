@@ -1,0 +1,2124 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Advanced Language & Computer School</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Theme Variables */
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #fff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --accent-color: #667eea;
+            --accent-secondary: #764ba2;
+            --accent-light: rgba(102, 126, 234, 0.1);
+            --border-color: #e2e8f0;
+            --card-bg: #fff;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 8px 30px rgba(102, 126, 234, 0.15);
+            --footer-bg: #2d3748;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --bottom-nav-bg: #fff;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+        }
+
+        /* Dark Theme */
+        html[data-theme='dark'] {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --accent-color: #7c3aed;
+            --accent-secondary: #a855f7;
+            --accent-light: rgba(124, 58, 237, 0.2);
+            --border-color: #4a5568;
+            --card-bg: #2d3748;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --card-shadow-hover: 0 8px 30px rgba(124, 58, 237, 0.25);
+            --footer-bg: #171923;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(26, 32, 44, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --bottom-nav-bg: #1a202c;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+            --success-color: #68d391;
+            --warning-color: #f6ad55;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none !important;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Improved Button Styles */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-secondary), var(--accent-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            box-shadow: none;
+            margin-left: 15px;
+        }
+
+        .btn-secondary::before {
+            background: var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Enhanced Section Animations */
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+
+        /* Improved Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .theme-toggle i {
+            font-size: 18px;
+        }
+
+        /* Enhanced Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        /* Improved Logo */
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        /* Simplified and Improved Navigation Hover Effects */
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            opacity: 0;
+            transition: all 0.3s ease;
+            border-radius: 25px;
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            font-size: 24px;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), transparent);
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+            animation: heroFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1) rotate(180deg);
+                opacity: 0.8;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Improved Card Styles */
+        .card-hover {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card-hover:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        /* About Story Section */
+        .about-story {
+            background: var(--bg-primary);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .story-text h2 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .story-text p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .story-image {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .story-image:hover {
+            transform: scale(1.02);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Mission & Values Section */
+        .mission-values {
+            background: var(--bg-secondary);
+        }
+
+        .mission-values-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .mission-card,
+        .values-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card::before,
+        .values-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .mission-card:hover::before,
+        .values-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .mission-card:hover,
+        .values-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .mission-card h3,
+        .values-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .mission-card:hover h3,
+        .values-card:hover h3 {
+            color: var(--accent-color);
+        }
+
+        .mission-card p,
+        .values-card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .values-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .values-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .values-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .values-card:hover .values-list li {
+            color: var(--text-primary);
+            transform: translateX(5px);
+        }
+
+        .values-card:hover .values-list li::before {
+            color: var(--success-color);
+            transform: scale(1.2);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--bg-primary);
+            text-align: center;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--accent-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover .stat-icon {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .stat-icon i {
+            font-size: 30px;
+            color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover .stat-icon i {
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover .stat-number {
+            transform: scale(1.05);
+        }
+
+        .stat-text {
+            color: var(--text-secondary);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover .stat-text {
+            color: var(--text-primary);
+        }
+
+        /* Team Section */
+        .team {
+            background: var(--bg-secondary);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .team-img {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .team-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover .team-img img {
+            transform: scale(1.05);
+        }
+
+        .team-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover .team-name {
+            color: var(--accent-color);
+        }
+
+        .team-role {
+            color: var(--accent-color);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .team-bio {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .team-social a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .team-social a:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Timeline Section */
+        .timeline {
+            background: var(--bg-primary);
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(180deg, var(--accent-color), var(--accent-secondary));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border: 4px solid var(--bg-primary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover::after {
+            background: var(--accent-secondary);
+            transform: scale(1.2);
+        }
+
+        .timeline-left {
+            left: 0;
+        }
+
+        .timeline-right {
+            left: 50%;
+        }
+
+        .timeline-left::after {
+            right: -10px;
+        }
+
+        .timeline-right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: scale(1.02);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .timeline-year {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .timeline-text {
+            color: var(--text-secondary);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--bg-secondary);
+        }
+
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-item:hover {
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .testimonial-item.active {
+            display: block;
+            animation: testimonialSlide 0.6s ease;
+        }
+
+        @keyframes testimonialSlide {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 4px solid var(--accent-light);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-item:hover .testimonial-img {
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .testimonial-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .testimonial-role {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: var(--border-color);
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot:hover,
+        .dot.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: var(--bg-primary);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            background: var(--card-bg);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--accent-color);
+            background: var(--accent-light);
+        }
+
+        .faq-question i {
+            transition: all 0.3s ease;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+            color: var(--accent-color);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-secondary) 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            font-size: 18px;
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--accent-color);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .cta .btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .cta .btn-secondary {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .cta .btn-secondary:hover {
+            background: white;
+            color: var(--accent-color);
+        }
+
+        /* Improved Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bottom-nav-bg);
+            box-shadow: var(--bottom-nav-shadow);
+            z-index: 999;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .bottom-nav-links {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .bottom-nav-item {
+            text-align: center;
+        }
+
+        .bottom-nav-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 8px 12px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .bottom-nav-icon:hover {
+            color: var(--accent-color);
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .bottom-nav-icon.active {
+            color: var(--accent-color);
+            background: var(--accent-light);
+        }
+
+        .bottom-nav-icon i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .bottom-nav-icon span {
+            font-size: 12px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 100px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+
+        .footer-text {
+            color: var(--footer-secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--footer-secondary);
+            transition: all 0.3s ease;
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #4a5568;
+            color: var(--footer-secondary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .story-content,
+            .mission-values-container {
+                grid-template-columns: 1fr;
+            }
+
+            .story-image {
+                order: -1;
+                margin-bottom: 30px;
+            }
+
+            .timeline-container::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .timeline-right {
+                left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 250px;
+                height: 100vh;
+                background: var(--bg-primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+                margin-left: 0;
+            }
+
+            .nav-links a {
+                padding: 10px 20px;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                text-align: center;
+                padding-top: 80px;
+                height: auto;
+                min-height: 40vh;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .mission-card,
+            .values-card {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+
+            .stat-item {
+                padding: 20px;
+            }
+
+            .testimonial-item {
+                padding: 20px;
+            }
+        }
+
+        /* Animation delays for staggered effects */
+        .stat-item:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .stat-item:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .stat-item:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .stat-item:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .team-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .team-card:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .team-card:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .team-card:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .faq-item:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .faq-item:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .faq-item:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .faq-item:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .faq-item:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="advanced.html" class="logo">Advanced<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="advanced.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="advanced.html#contact">Contact</a></li>
+                </ul>
+                <div class="header-right">
+                    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="about-hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>About <span>Advanced</span></h1>
+                <p>Learn more about our journey, mission, and the passionate team behind Advanced Language & Computer
+                    School.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Story Section -->
+    <section id="story" class="about-story visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Story</h2>
+                <p>The journey of Advanced Language & Computer School from its inception to becoming a leading
+                    educational institution</p>
+            </div>
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>Empowering Students Since 2010</h2>
+                    <p>Advanced Language & Computer School was founded in 2010 with a vision to bridge the gap between
+                        traditional education and the rapidly evolving demands of the tech industry. Our founders, a
+                        group of passionate educators and industry professionals, recognized the need for a more
+                        practical, hands-on approach to learning that would prepare students for real-world challenges.
+                    </p>
+
+                    <p>What began as a small institute with just three classrooms and a handful of dedicated instructors
+                        has grown into a comprehensive educational center with state-of-the-art facilities, serving
+                        thousands of students from diverse backgrounds.</p>
+
+                    <p>Throughout our journey, we have remained committed to our core principles: providing high-quality
+                        education, fostering innovation, and creating an inclusive learning environment where every
+                        student can thrive. We continuously adapt our curriculum to reflect the latest industry trends
+                        and technologies, ensuring our graduates are always ahead of the curve.</p>
+                </div>
+                <div class="story-image">
+                    <img src="https://placeholder.svg?height=400&width=500" alt="Advanced School History">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Values Section -->
+    <section id="mission-values" class="mission-values">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mission & Values</h2>
+                <p>The guiding principles that drive everything we do at Advanced</p>
+            </div>
+            <div class="mission-values-container">
+                <div class="mission-card card-hover">
+                    <h3>Our Mission</h3>
+                    <p>To empower individuals with the knowledge, skills, and confidence needed to excel in the digital
+                        age through innovative education and practical training.</p>
+                    <p>We strive to make quality education accessible to all, regardless of background or prior
+                        experience, and to foster a community of lifelong learners who are prepared to meet the
+                        challenges of tomorrow.</p>
+                    <p>By combining cutting-edge technical training with language education, we aim to create
+                        well-rounded professionals who can communicate effectively in a global marketplace.</p>
+                </div>
+                <div class="values-card card-hover">
+                    <h3>Our Values</h3>
+                    <ul class="values-list">
+                        <li><strong>Excellence:</strong> We are committed to the highest standards in everything we do.
+                        </li>
+                        <li><strong>Innovation:</strong> We embrace new ideas and technologies to continuously improve
+                            our teaching methods.</li>
+                        <li><strong>Inclusivity:</strong> We create a welcoming environment where diversity is
+                            celebrated.</li>
+                        <li><strong>Integrity:</strong> We operate with honesty, transparency, and ethical conduct.</li>
+                        <li><strong>Collaboration:</strong> We believe in the power of teamwork and community.</li>
+                        <li><strong>Adaptability:</strong> We remain flexible and responsive to changing industry needs.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Achievements</h2>
+                <p>The numbers that reflect our commitment to excellence and growth</p>
+            </div>
+            <div class="stats-container">
+                <div class="stat-item card-hover">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="stat-number" data-count="5000">0</h3>
+                    <p class="stat-text">Students Trained</p>
+                </div>
+                <div class="stat-item card-hover">
+                    <div class="stat-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="stat-number" data-count="20">0</h3>
+                    <p class="stat-text">Professional Courses</p>
+                </div>
+                <div class="stat-item card-hover">
+                    <div class="stat-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="stat-number" data-count="15">0</h3>
+                    <p class="stat-text">Expert Instructors</p>
+                </div>
+                <div class="stat-item card-hover">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="stat-number" data-count="98">0</h3>
+                    <p class="stat-text">Success Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our Team</h2>
+                <p>The dedicated professionals who make Advanced a center of excellence</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Dr. Sarah Johnson">
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Dr. Sarah Johnson</h3>
+                        <p class="team-role">Founder & Director</p>
+                        <p class="team-bio">With over 20 years of experience in education and technology, Dr. Johnson
+                            leads our institution with vision and passion.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Prof. Michael Chen">
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Prof. Michael Chen</h3>
+                        <p class="team-role">Head of Computer Science</p>
+                        <p class="team-bio">A former Silicon Valley engineer, Prof. Chen brings real-world expertise to
+                            our programming and data science courses.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Dr. Elena Rodriguez">
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Dr. Elena Rodriguez</h3>
+                        <p class="team-role">Head of Languages</p>
+                        <p class="team-bio">Fluent in five languages, Dr. Rodriguez has revolutionized our language
+                            teaching methodology with her innovative approach.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="James Wilson">
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">James Wilson</h3>
+                        <p class="team-role">Student Success Coordinator</p>
+                        <p class="team-bio">Dedicated to ensuring every student reaches their full potential through
+                            personalized support and guidance.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Journey</h2>
+                <p>Key milestones in the evolution of Advanced Language & Computer School</p>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-item timeline-left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2010</div>
+                        <h3 class="timeline-title">Foundation</h3>
+                        <p class="timeline-text">Advanced Language & Computer School was established with a focus on
+                            practical education.</p>
+                    </div>
+                </div>
+                <div class="timeline-item timeline-right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2012</div>
+                        <h3 class="timeline-title">Expansion</h3>
+                        <p class="timeline-text">Expanded our curriculum to include more programming languages and
+                            specialized courses.</p>
+                    </div>
+                </div>
+                <div class="timeline-item timeline-left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2015</div>
+                        <h3 class="timeline-title">New Campus</h3>
+                        <p class="timeline-text">Moved to a larger campus with state-of-the-art facilities and
+                            technology labs.</p>
+                    </div>
+                </div>
+                <div class="timeline-item timeline-right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2017</div>
+                        <h3 class="timeline-title">Industry Partnerships</h3>
+                        <p class="timeline-text">Formed strategic partnerships with leading tech companies for
+                            internships and job placements.</p>
+                    </div>
+                </div>
+                <div class="timeline-item timeline-left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2020</div>
+                        <h3 class="timeline-title">Online Learning</h3>
+                        <p class="timeline-text">Launched comprehensive online learning platform to reach students
+                            globally.</p>
+                    </div>
+                </div>
+                <div class="timeline-item timeline-right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024</div>
+                        <h3 class="timeline-title">Today</h3>
+                        <p class="timeline-text">Continuing to innovate and expand our offerings to meet the evolving
+                            needs of students and industry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What People Say</h2>
+                <p>Hear from our students, alumni, and partners about their experience with Advanced</p>
+            </div>
+            <div class="testimonials-container">
+                <div class="testimonial-item active">
+                    <div class="testimonial-img">
+                        <img src="https://placeholder.svg?height=80&width=80" alt="Student 1">
+                    </div>
+                    <p class="testimonial-text">"The web development course at Advanced completely transformed my
+                        career. The instructors were knowledgeable and supportive, and the curriculum was comprehensive
+                        and up-to-date with industry standards."</p>
+                    <h4 class="testimonial-name">Sarah Johnson</h4>
+                    <p class="testimonial-role">Web Developer</p>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-img">
+                        <img src="https://placeholder.svg?height=80&width=80" alt="Student 2">
+                    </div>
+                    <p class="testimonial-text">"I took the Data Science course with no prior experience, and now I'm
+                        working as a junior data analyst. The hands-on projects and real-world applications made
+                        learning both fun and practical."</p>
+                    <h4 class="testimonial-name">Michael Chen</h4>
+                    <p class="testimonial-role">Data Analyst</p>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-img">
+                        <img src="https://placeholder.svg?height=80&width=80" alt="Student 3">
+                    </div>
+                    <p class="testimonial-text">"The Business English course helped me secure a position at an
+                        international company. The focus on practical communication skills and industry-specific
+                        vocabulary was exactly what I needed."</p>
+                    <h4 class="testimonial-name">Elena Rodriguez</h4>
+                    <p class="testimonial-role">Marketing Manager</p>
+                </div>
+                <div class="testimonial-dots">
+                    <div class="dot active" data-slide="0"></div>
+                    <div class="dot" data-slide="1"></div>
+                    <div class="dot" data-slide="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about Advanced Language & Computer School</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What makes Advanced different from other educational institutions?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Advanced stands out for our practical, industry-focused approach to education. We combine
+                            theoretical knowledge with hands-on experience, small class sizes for personalized
+                            attention, instructors with real-world expertise, and strong industry connections for
+                            internships and job placements.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer financial aid or scholarships?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer various financial aid options and merit-based scholarships to help make
+                            education accessible to all qualified students. We also provide flexible payment plans and
+                            partner with several organizations to offer additional scholarship opportunities.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I take courses online or do I need to attend in person?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer both in-person and online options for most of our courses. Our online platform
+                            provides the same high-quality education with interactive elements, live sessions with
+                            instructors, and collaborative projects with fellow students.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What kind of job placement assistance do you provide?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our Career Services team provides comprehensive job placement assistance including resume
+                            building, interview preparation, networking events, career fairs, and direct connections
+                            with our industry partners. We maintain a job board exclusively for our students and alumni.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do I need prior experience to enroll in your courses?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Many of our courses are designed for beginners and require no prior experience. For more
+                            advanced courses, prerequisites are clearly stated in the course descriptions. We also offer
+                            preparatory courses to help students build the necessary foundation for advanced topics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta">
+        <div class="container">
+            <h2>Ready to Start Your Learning Journey?</h2>
+            <p>Join thousands of students who have transformed their careers with Advanced Language & Computer School.
+            </p>
+            <div class="cta-buttons">
+                <a href="courses.html" class="btn">Explore Courses</a>
+                <a href="advanced.html#contact" class="btn btn-secondary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-logo">Advanced<span>.</span></h3>
+                    <p class="footer-text">Advanced is a premier institution offering cutting-edge courses in
+                        programming languages and computer science.</p>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="advanced.html">Home</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="advanced.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="courses/webdev.html">Web Development</a></li>
+                        <li><a href="courses/data.html">Data Science</a></li>
+                        <li><a href="courses/mobile.html">Mobile App Development</a></li>
+                        <li><a href="courses/business.html">Business English</a></li>
+                        <li><a href="courses/technical.html">Technical Writing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html#faq">FAQ</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="privacy.html">Terms & Conditions</a></li>
+                        <li><a href="documentation&sup.html">Documentation</a></li>
+                        <li><a href="documentation&sup.html">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Advanced Language & Computer School. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-links">
+            <div class="bottom-nav-item">
+                <a href="advanced.html" class="bottom-nav-icon">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="courses.html" class="bottom-nav-icon">
+                    <i class="fas fa-book"></i>
+                    <span>Courses</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="about.html" class="bottom-nav-icon active">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="advanced.html#contact" class="bottom-nav-icon">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        } else if (prefersDark) {
+            htmlElement.setAttribute('data-theme', 'dark');
+            updateThemeIcon('dark');
+        }
+
+        function toggleTheme() {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-moon';
+            } else {
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Sticky Header
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
+
+                // Close all other answers
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                });
+
+                // Toggle current answer
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        // Testimonial Slider
+        const testimonialItems = document.querySelectorAll('.testimonial-item');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            testimonialItems.forEach(item => item.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            testimonialItems[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        // Add click event to dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+
+        // Auto slide
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % testimonialItems.length;
+            showSlide(currentSlide);
+        }, 5000);
+
+        // Animate Stats Counter
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-count'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    el.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+
+                    // Animate counters if this is a stat item
+                    if (entry.target.classList.contains('stat-item')) {
+                        const counter = entry.target.querySelector('.stat-number');
+                        if (counter && !counter.classList.contains('animated')) {
+                            counter.classList.add('animated');
+                            animateCounter(counter);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animatable elements
+        document.querySelectorAll('.stat-item, .team-card, .faq-item, .story-text, .story-image, .mission-card, .values-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Timeline Animation
+        function checkTimeline() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const triggerBottom = window.innerHeight * 0.8;
+
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < triggerBottom) {
+                    item.classList.add('visible');
+                }
+            });
+        }
+
+        // Scroll Animation
+        function checkSections() {
+            const sections = document.querySelectorAll('section');
+            const triggerBottom = window.innerHeight * 0.8;
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < triggerBottom) {
+                    section.classList.add('visible');
+                }
+            });
+
+            checkTimeline();
+        }
+
+        window.addEventListener('scroll', checkSections);
+        window.addEventListener('load', checkSections);
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navLinks.classList.remove('active');
+
+                if (this.classList.contains('bottom-nav-icon')) {
+                    document.querySelectorAll('.bottom-nav-icon').forEach(icon => {
+                        icon.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initialize page
+        document.querySelector('section').classList.add('visible');
+
+        // Add floating particles to hero section
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: var(--accent-color);
+                border-radius: 50%;
+                pointer-events: none;
+                opacity: 0.6;
+                animation: float 6s linear infinite;
+            `;
+
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+
+            document.querySelector('.hero').appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 6000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 500);
+
+        // Add CSS for particle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0% {
+                    transform: translateY(100vh) rotate(0deg);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 0.6;
+                }
+                90% {
+                    opacity: 0.6;
+                }
+                100% {
+                    transform: translateY(-100px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>

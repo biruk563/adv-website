@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish for Beginners - Advanced Language Academy</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Theme Variables */
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #fff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --accent-color: #4a6cf7;
+            --accent-light: rgba(74, 108, 247, 0.1);
+            --border-color: #e2e8f0;
+            --card-bg: #fff;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            --footer-bg: #2d3748;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --bottom-nav-bg: #fff;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark Theme */
+        html[data-theme='dark'] {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --accent-color: #5a78ff;
+            --accent-light: rgba(90, 120, 255, 0.2);
+            --border-color: #4a5568;
+            --card-bg: #2d3748;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            --footer-bg: #171923;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(26, 32, 44, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --bottom-nav-bg: #1a202c;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--accent-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+
+        .btn-lg {
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .theme-toggle i {
+            font-size: 18px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), var(--accent-light));
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), var(--accent-light));
+            bottom: -100px;
+            left: -100px;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            background: var(--accent-light);
+            color: var(--accent-color);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .badge i {
+            margin-right: 8px;
+        }
+
+        /* Course Overview */
+        .course-overview {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .overview-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .overview-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .overview-features {
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon {
+            background: var(--accent-light);
+            color: var(--accent-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .feature-text p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .overview-image {
+            position: relative;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .overview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Curriculum Section */
+        .curriculum {
+            padding: 80px 0;
+        }
+
+        .curriculum-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .module {
+            margin-bottom: 40px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .module:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-header {
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .module-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .module.active .module-content {
+            display: block;
+        }
+
+        .module-content ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        .module-content li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .module-content p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Instructors Section */
+        .instructors {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .instructor-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .instructor-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .instructor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instructor-info {
+            padding: 20px;
+        }
+
+        .instructor-info h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .instructor-info p.position {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .instructor-info p.bio {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+        }
+
+        .pricing-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            width: 300px;
+            text-align: center;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-header {
+            background: var(--accent-light);
+            padding: 20px;
+            color: var(--text-primary);
+        }
+
+        .pricing-card.featured .pricing-header {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .pricing-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        .pricing-price span {
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .pricing-content {
+            padding: 20px;
+        }
+
+        .pricing-features {
+            margin-bottom: 20px;
+        }
+
+        .pricing-feature {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .pricing-feature:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-feature i {
+            color: var(--accent-color);
+            margin-right: 5px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .testimonial-content {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 60px;
+            color: var(--accent-color);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-content p {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .faq-question i {
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #3b5bdb 100%);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--accent-color);
+            border-color: white;
+        }
+
+        .cta .btn:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 100px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+
+        .footer-text {
+            color: var(--footer-secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--footer-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #4a5568;
+            color: var(--footer-secondary);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bottom-nav-bg);
+            box-shadow: var(--bottom-nav-shadow);
+            z-index: 999;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .bottom-nav-links {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .bottom-nav-item {
+            text-align: center;
+        }
+
+        .bottom-nav-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .bottom-nav-icon i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .bottom-nav-icon span {
+            font-size: 12px;
+        }
+
+        .bottom-nav-icon:hover,
+        .bottom-nav-icon.active {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-image {
+                height: 300px;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 250px;
+                height: 100vh;
+                background: var(--bg-primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                font-size: 24px;
+            }
+
+            .hero {
+                text-align: center;
+                padding-top: 80px;
+                height: auto;
+                min-height: 60vh;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .hero-badges {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+
+            .pricing-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="../advanced.html" class="logo">Advanced<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="../advanced.html">Home</a></li>
+                    <li><a href="../courses.html">Courses</a></li>
+                    <li><a href="../advanced.html#features">Features</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../advanced.html#contact">Contact</a></li>
+                </ul>
+                <div class="header-right">
+                    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="course-hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Spanish for <span>Beginners</span></h1>
+                <p>Start your journey to Spanish fluency with our comprehensive beginner's course. Learn to speak, read,
+                    and write in one of the world's most widely spoken languages.</p>
+
+                <div class="hero-badges">
+                    <div class="badge"><i class="fas fa-clock"></i> 12 Weeks</div>
+                    <div class="badge"><i class="fas fa-signal"></i> No Prior Knowledge Required</div>
+                    <div class="badge"><i class="fas fa-users"></i> Limited to 15 Students</div>
+                    <div class="badge"><i class="fas fa-certificate"></i> Certificate Included</div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="enroll.html" class="btn btn-lg">Enroll Now</a>
+                    <a href="#curriculum" class="btn btn-secondary btn-lg">View Curriculum</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Overview Section -->
+    <section id="overview" class="course-overview visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Overview</h2>
+                <p>Everything you need to know about our comprehensive Spanish program for beginners</p>
+            </div>
+
+            <div class="overview-grid">
+                <div class="overview-content">
+                    <h2>Begin Your Spanish Language Journey</h2>
+                    <p>This 12-week course is designed for complete beginners with no prior knowledge of Spanish.
+                        Through engaging lessons, interactive activities, and cultural immersion, you'll build a solid
+                        foundation in Spanish that will prepare you for further study or basic communication in
+                        Spanish-speaking countries.</p>
+
+                    <div class="overview-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Practical Conversation Skills</h4>
+                                <p>Learn to introduce yourself, order food, ask for directions, and handle everyday
+                                    situations in Spanish. Our conversation-focused approach ensures you'll be speaking
+                                    from day one.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Essential Grammar & Vocabulary</h4>
+                                <p>Master the fundamental building blocks of Spanish, including present tense verbs,
+                                    basic sentence structure, and vocabulary for everyday situations. Learn through
+                                    context, not rote memorization.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Cultural Understanding</h4>
+                                <p>Explore the rich cultures of Spanish-speaking countries through authentic materials,
+                                    music, videos, and cultural discussions. Understanding the cultural context will
+                                    enhance your language learning experience.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-headphones"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Listening & Pronunciation</h4>
+                                <p>Develop your ear for Spanish through listening exercises and perfect your
+                                    pronunciation with guided practice. Learn to distinguish regional accents and speak
+                                    with confidence.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#curriculum" class="btn">Explore Curriculum</a>
+                </div>
+
+                <div class="overview-image">
+                    <img src="https://placeholder.svg?height=400&width=600" alt="Spanish for Beginners Course">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Section -->
+    <section id="curriculum" class="curriculum visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Curriculum</h2>
+                <p>A comprehensive learning path designed to develop your Spanish language skills from scratch</p>
+            </div>
+
+            <div class="curriculum-container">
+                <div class="module active">
+                    <div class="module-header">
+                        <div class="module-title">Module 1: First Steps in Spanish</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Begin your Spanish journey with essential greetings and introductions.</p>
+                        <ul>
+                            <li>Spanish alphabet and pronunciation basics</li>
+                            <li>Greetings and introductions</li>
+                            <li>Numbers 1-100</li>
+                            <li>Basic questions and answers</li>
+                            <li>Subject pronouns and the verb "ser" (to be)</li>
+                            <li>Project: Introduce yourself in Spanish</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 2: Describing Yourself and Others</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn to describe people, places, and things in Spanish.</p>
+                        <ul>
+                            <li>Adjectives and gender agreement</li>
+                            <li>Colors, physical descriptions, and personality traits</li>
+                            <li>The verb "estar" (to be) and the difference from "ser"</li>
+                            <li>Possessive adjectives</li>
+                            <li>Family vocabulary</li>
+                            <li>Project: Describe your family and friends</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 3: Daily Life and Routines</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Express daily activities and routines in Spanish.</p>
+                        <ul>
+                            <li>Regular -ar, -er, and -ir verbs in present tense</li>
+                            <li>Time expressions and telling time</li>
+                            <li>Days of the week and months</li>
+                            <li>Daily routine vocabulary</li>
+                            <li>Reflexive verbs for daily activities</li>
+                            <li>Project: Describe your daily routine</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 4: Food and Dining</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn to navigate restaurants and talk about food in Spanish.</p>
+                        <ul>
+                            <li>Food and beverage vocabulary</li>
+                            <li>Ordering in restaurants</li>
+                            <li>Expressing likes and dislikes with "gustar"</li>
+                            <li>Common irregular verbs</li>
+                            <li>Cultural aspects of dining in Spanish-speaking countries</li>
+                            <li>Project: Role-play restaurant scenario</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 5: Shopping and Clothing</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Master shopping vocabulary and expressions in Spanish.</p>
+                        <ul>
+                            <li>Clothing and shopping vocabulary</li>
+                            <li>Colors and sizes</li>
+                            <li>Demonstrative adjectives (this, that, these, those)</li>
+                            <li>Numbers 100-1000 and prices</li>
+                            <li>Making comparisons</li>
+                            <li>Project: Shopping dialogue simulation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 6: Travel and Transportation</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn to navigate travel situations in Spanish-speaking countries.</p>
+                        <ul>
+                            <li>Transportation vocabulary</li>
+                            <li>Asking for and giving directions</li>
+                            <li>Travel accommodations and booking</li>
+                            <li>The verb "ir" (to go) and future plans with "ir a + infinitive"</li>
+                            <li>Cultural aspects of travel in Spanish-speaking countries</li>
+                            <li>Project: Plan a trip to a Spanish-speaking country</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 7: Health and Wellness</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Express health concerns and wellness topics in Spanish.</p>
+                        <ul>
+                            <li>Body parts vocabulary</li>
+                            <li>Describing symptoms and illnesses</li>
+                            <li>Making appointments</li>
+                            <li>Giving advice with "deber" and "tener que"</li>
+                            <li>Pharmacy and medication vocabulary</li>
+                            <li>Project: Doctor's visit role-play</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 8: Leisure and Entertainment</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Discuss hobbies, interests, and entertainment in Spanish.</p>
+                        <ul>
+                            <li>Hobbies and free time activities</li>
+                            <li>Sports and entertainment vocabulary</li>
+                            <li>Making plans and invitations</li>
+                            <li>Accepting and declining invitations</li>
+                            <li>Cultural activities in Spanish-speaking countries</li>
+                            <li>Project: Plan a weekend activity with friends</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 9: Home and Environment</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn vocabulary related to home, neighborhood, and environment.</p>
+                        <ul>
+                            <li>House and furniture vocabulary</li>
+                            <li>Prepositions of place</li>
+                            <li>Neighborhood and city vocabulary</li>
+                            <li>Environmental terms and expressions</li>
+                            <li>The verb "estar" with locations</li>
+                            <li>Project: Describe your home and neighborhood</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 10: Past Experiences</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Begin talking about past events in Spanish.</p>
+                        <ul>
+                            <li>Introduction to the preterite tense</li>
+                            <li>Regular and common irregular verbs in the past</li>
+                            <li>Time expressions for the past</li>
+                            <li>Talking about experiences and events</li>
+                            <li>Sequencing past events</li>
+                            <li>Project: Tell a story about a past experience</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 11: Future Plans</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Express future plans and intentions in Spanish.</p>
+                        <ul>
+                            <li>Future expressions with "ir a + infinitive"</li>
+                            <li>Introduction to the simple future tense</li>
+                            <li>Making predictions</li>
+                            <li>Expressing hopes and wishes</li>
+                            <li>Planning vocabulary</li>
+                            <li>Project: Describe your future plans</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 12: Capstone Project</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Apply everything you've learned in a comprehensive final project.</p>
+                        <ul>
+                            <li>Review of key grammar concepts</li>
+                            <li>Vocabulary consolidation</li>
+                            <li>Extended conversation practice</li>
+                            <li>Cultural presentation preparation</li>
+                            <li>Self-assessment and progress evaluation</li>
+                            <li>Project: Multimedia presentation about yourself and your interests in Spanish</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructors Section -->
+    <section id="instructors" class="instructors visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Your Instructors</h2>
+                <p>Learn from experienced Spanish language educators with native fluency</p>
+            </div>
+
+            <div class="overview-grid">
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Elena Rodriguez">
+                    </div>
+                    <div class="instructor-info">
+                        <h3>Elena Rodriguez</h3>
+                        <p class="position">Lead Instructor, Native Spanish Speaker</p>
+                        <p class="bio">Elena is a native Spanish speaker from Madrid with over 10 years of experience
+                            teaching Spanish to beginners. She holds a Master's degree in Language Education and
+                            specializes in making language learning engaging and accessible for all students. Her
+                            interactive teaching style focuses on practical communication skills.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Carlos Mendez">
+                    </div>
+                    <div class="instructor-info">
+                        <h3>Carlos Mendez</h3>
+                        <p class="position">Cultural Specialist & Conversation Coach</p>
+                        <p class="bio">Carlos brings Latin American cultural perspectives to the course as a native of
+                            Mexico City. With a background in linguistics and cultural studies, he specializes in
+                            teaching the nuances of Spanish as used across different Spanish-speaking regions. His
+                            sessions focus on authentic conversation and cultural immersion.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-spotify"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Pricing</h2>
+                <p>Flexible payment options to fit your budget</p>
+            </div>
+
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Self-Paced</div>
+                        <div class="pricing-price">$349 <span>one-time payment</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Full course access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Course materials and resources
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Certificate of completion</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Community forum access</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Live group sessions</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Conversation practice</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Personalized feedback</div>
+                        </div>
+                        <a href="enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Interactive</div>
+                        <div class="pricing-price">$599 <span>one-time payment</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Full course access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Course materials and resources
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Certificate of completion</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Community forum access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Weekly live group sessions</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Conversation practice</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Personalized feedback</div>
+                        </div>
+                        <a href="enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Premium</div>
+                        <div class="pricing-price">$899 <span>one-time payment</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Everything in Interactive</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> 6 one-on-one coaching sessions
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Personalized learning plan</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Priority support</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Additional practice materials
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Cultural immersion activities
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Extended access (18 months)</div>
+                        </div>
+                        <a href="enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Student Testimonials</h2>
+                <p>Hear what our graduates have to say about their experience</p>
+            </div>
+
+            <div class="testimonial-container">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I had tried learning Spanish with apps before but never made much progress. This course was
+                            completely different. The structured approach and focus on practical conversation skills
+                            made all the difference. After just 12 weeks, I was able to have basic conversations during
+                            my vacation in Spain. The instructors were supportive and made learning fun!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="Jennifer Wilson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Jennifer Wilson</h4>
+                            <p>Travel Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"As someone who needed to learn Spanish for work, this course was exactly what I needed. The
+                            focus on practical vocabulary and real-world situations helped me gain confidence quickly.
+                            The cultural insights were also invaluable for understanding my Spanish-speaking colleagues
+                            better. I'm now continuing with the intermediate course and can already see how much my
+                            professional relationships have improved."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="Michael Chang">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Chang</h4>
+                            <p>Business Development Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I enrolled in this course at 65 years old, worried that I might be too old to learn a new
+                            language. The instructors were so patient and encouraging, and the course was designed in a
+                            way that made learning gradual and manageable. I'm proud to say I can now have simple
+                            conversations with my Spanish-speaking grandchildren-in-law. It's opened up a whole new
+                            connection with my family!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="Barbara Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Barbara Johnson</h4>
+                            <p>Retired Teacher</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our Spanish for Beginners course</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        <span>Do I really need zero prior knowledge of Spanish?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, this course is designed for absolute beginners. We start from the very basics, including
+                            pronunciation and the alphabet. If you already know some Spanish, you might find the first
+                            few modules too basic, but you'll still benefit from the structured approach and
+                            conversation practice. If you're unsure about your level, we offer a free assessment to help
+                            determine if this is the right course for you.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How much Spanish will I be able to speak after this course?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>By the end of this 12-week course, you'll reach approximately an A1-A2 level on the Common
+                            European Framework of Reference for Languages (CEFR). This means you'll be able to handle
+                            basic everyday situations like introducing yourself, ordering food, shopping, asking for
+                            directions, and having simple conversations about familiar topics. You'll have a vocabulary
+                            of approximately 800-1000 words and understand the fundamentals of Spanish grammar.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How much time should I commit to the course each week?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We recommend dedicating at least 5-7 hours per week to the course for optimal results. This
+                            includes 2-3 hours for lessons and guided practice, plus 3-4 hours for self-study, homework,
+                            and additional practice. Consistency is key in language learning, so it's better to practice
+                            a little each day rather than cramming all your study time into one day per week.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What dialect of Spanish is taught in this course?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our course teaches standard Spanish (sometimes called Castilian Spanish) as a foundation, but
+                            we also expose students to different dialects and regional variations from across the
+                            Spanish-speaking world. Our instructors come from different Spanish-speaking countries, so
+                            you'll hear various accents throughout the course. For beginners, the differences between
+                            dialects are less important than building a solid foundation in the language.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Will I receive feedback on my pronunciation?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, pronunciation feedback is an important part of our course. In the Interactive and
+                            Premium plans, you'll receive feedback during live sessions. All students can also use our
+                            speech recognition tools for self-assessment. We focus on helping you develop clear,
+                            understandable pronunciation rather than aiming for a perfect native accent. Remember that
+                            having an accent is completely normal and doesn't prevent effective communication.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What materials do I need for this course?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>All essential course materials are provided digitally through our learning platform. You'll
+                            need a computer or tablet with internet access, a microphone for speaking practice, and
+                            headphones or speakers. We recommend having a notebook for taking notes and practicing
+                            writing. Optional supplementary materials like textbooks or workbooks will be suggested but
+                            are not required. For the Interactive and Premium plans, you'll also need a webcam for live
+                            sessions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta visible">
+        <div class="container">
+            <h2>Ready to Start Your Spanish Journey?</h2>
+            <p>Enroll today and take the first step toward speaking Spanish with confidence. Limited spots available for
+                our next cohort starting soon!</p>
+            <a href="enroll.html" class="btn btn-lg">Enroll Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-logo">Advanced<span>.</span></h3>
+                    <p class="footer-text">Advanced is a premier institution offering cutting-edge courses in language,
+                        business, technology, and professional development.</p>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../advanced.html">Home</a></li>
+                        <li><a href="../courses.html">Courses</a></li>
+                        <li><a href="../advanced.html#features">Features</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../advanced.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="business-english.html">Business English</a></li>
+                        <li><a href="spanish-beginners.html">Spanish for Beginners</a></li>
+                        <li><a href="mandarin-fundamentals.html">Mandarin Fundamentals</a></li>
+                        <li><a href="digital-marketing.html">Digital Marketing</a></li>
+                        <li><a href="project-management.html">Project Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="../privacy.html">Privacy Policy</a></li>
+                        <li><a href="../terms.html">Terms & Conditions</a></li>
+                        <li><a href="../documentation.html">Documentation</a></li>
+                        <li><a href="../support.html">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Advanced Language Academy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-links">
+            <div class="bottom-nav-item">
+                <a href="../advanced.html" class="bottom-nav-icon">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../courses.html" class="bottom-nav-icon active">
+                    <i class="fas fa-book"></i>
+                    <span>Courses</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../about.html" class="bottom-nav-icon">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../advanced.html#contact" class="bottom-nav-icon">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or use device preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Set initial theme
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        } else if (prefersDark) {
+            htmlElement.setAttribute('data-theme', 'dark');
+            updateThemeIcon('dark');
+        }
+
+        // Toggle theme function
+        function toggleTheme() {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        // Update theme icon
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-moon';
+            } else {
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        // Add event listener to theme toggle button
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Sticky Header
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Module Toggle
+        const moduleHeaders = document.querySelectorAll('.module-header');
+
+        moduleHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const module = header.parentElement;
+                module.classList.toggle('active');
+            });
+        });
+
+        // FAQ Toggle
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initialize page with all sections visible
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('visible');
+        });
+    </script>
+</body>
+
+</html>

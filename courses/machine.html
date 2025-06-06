@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Fundamentals - Advanced AI School</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Theme Variables */
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #fff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --accent-color: #4a6cf7;
+            --accent-light: rgba(74, 108, 247, 0.1);
+            --border-color: #e2e8f0;
+            --card-bg: #fff;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            --footer-bg: #2d3748;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --bottom-nav-bg: #fff;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark Theme */
+        html[data-theme='dark'] {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --accent-color: #5a78ff;
+            --accent-light: rgba(90, 120, 255, 0.2);
+            --border-color: #4a5568;
+            --card-bg: #2d3748;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            --footer-bg: #171923;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(26, 32, 44, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --bottom-nav-bg: #1a202c;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--accent-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+
+        .btn-lg {
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .theme-toggle i {
+            font-size: 18px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), var(--accent-light));
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), var(--accent-light));
+            bottom: -100px;
+            left: -100px;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            background: var(--accent-light);
+            color: var(--accent-color);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .badge i {
+            margin-right: 8px;
+        }
+
+        /* Course Overview */
+        .course-overview {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .overview-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .overview-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .overview-features {
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon {
+            background: var(--accent-light);
+            color: var(--accent-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .feature-text p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .overview-image {
+            position: relative;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .overview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Curriculum Section */
+        .curriculum {
+            padding: 80px 0;
+        }
+
+        .curriculum-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .module {
+            margin-bottom: 40px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .module:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-header {
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .module-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .module.active .module-content {
+            display: block;
+        }
+
+        .module-content ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        .module-content li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .module-content p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Instructors Section */
+        .instructors {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .instructor-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .instructor-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .instructor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instructor-info {
+            padding: 20px;
+        }
+
+        .instructor-info h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .instructor-info p.position {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .instructor-info p.bio {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+        }
+
+        .pricing-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            width: 300px;
+            text-align: center;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-header {
+            background: var(--accent-light);
+            padding: 20px;
+            color: var(--text-primary);
+        }
+
+        .pricing-card.featured .pricing-header {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .pricing-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        .pricing-price span {
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .pricing-content {
+            padding: 20px;
+        }
+
+        .pricing-features {
+            margin-bottom: 20px;
+        }
+
+        .pricing-feature {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .pricing-feature:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-feature i {
+            color: var(--accent-color);
+            margin-right: 5px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .testimonial-content {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 60px;
+            color: var(--accent-color);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-content p {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .faq-question i {
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #3b5bdb 100%);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--accent-color);
+            border-color: white;
+        }
+
+        .cta .btn:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 100px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+
+        .footer-text {
+            color: var(--footer-secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--footer-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #4a5568;
+            color: var(--footer-secondary);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bottom-nav-bg);
+            box-shadow: var(--bottom-nav-shadow);
+            z-index: 999;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .bottom-nav-links {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .bottom-nav-item {
+            text-align: center;
+        }
+
+        .bottom-nav-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .bottom-nav-icon i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .bottom-nav-icon span {
+            font-size: 12px;
+        }
+
+        .bottom-nav-icon:hover,
+        .bottom-nav-icon.active {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-image {
+                height: 300px;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 250px;
+                height: 100vh;
+                background: var(--bg-primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                font-size: 24px;
+            }
+
+            .hero {
+                text-align: center;
+                padding-top: 80px;
+                height: auto;
+                min-height: 60vh;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .hero-badges {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+
+            .pricing-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="../advanced.html" class="logo">Advanced<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="../advanced.html">Home</a></li>
+                    <li><a href="../courses.html">Courses</a></li>
+                    <li><a href="../advanced.html#features">Features</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+                <div class="header-right">
+                    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="course-hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Machine Learning <span>Fundamentals</span></h1>
+                <p>Master the core concepts and techniques of machine learning to build intelligent systems that can
+                    learn from data, make predictions, and solve complex real-world problems.</p>
+
+                <div class="hero-badges">
+                    <div class="badge"><i class="fas fa-clock"></i> 16 Weeks</div>
+                    <div class="badge"><i class="fas fa-signal"></i> Intermediate Level</div>
+                    <div class="badge"><i class="fas fa-users"></i> Limited to 20 Students</div>
+                    <div class="badge"><i class="fas fa-certificate"></i> Certificate Included</div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="enroll.html" class="btn btn-lg">Enroll Now</a>
+                    <a href="#curriculum" class="btn btn-secondary btn-lg">View Curriculum</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Overview Section -->
+    <section id="overview" class="course-overview visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Overview</h2>
+                <p>Everything you need to know about our comprehensive machine learning program</p>
+            </div>
+
+            <div class="overview-grid">
+                <div class="overview-content">
+                    <h2>Become a Machine Learning Engineer</h2>
+                    <p>This intensive 16-week course will transform you into a skilled machine learning practitioner
+                        capable of building intelligent systems that learn from data. Whether you're a software
+                        developer looking to specialize or a data analyst wanting to advance your career, our curriculum
+                        is designed to give you the theoretical knowledge and practical skills needed to excel in this
+                        rapidly growing field.</p>
+
+                    <div class="overview-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Comprehensive Algorithm Coverage</h4>
+                                <p>Master both classical and modern machine learning algorithms, from linear regression
+                                    and decision trees to neural networks and deep learning, with hands-on
+                                    implementation experience.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>End-to-End ML Projects</h4>
+                                <p>Build complete machine learning pipelines from data collection and preprocessing to
+                                    model deployment and monitoring. Work on real-world projects that solve actual
+                                    business problems across various domains.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Practical Implementation Skills</h4>
+                                <p>Gain hands-on experience with industry-standard tools and frameworks like TensorFlow,
+                                    PyTorch, scikit-learn, and more. Learn best practices for implementing machine
+                                    learning solutions at scale.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Model Evaluation & Optimization</h4>
+                                <p>Master techniques for evaluating model performance, diagnosing issues like
+                                    overfitting and underfitting, and optimizing models for better accuracy and
+                                    efficiency.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#curriculum" class="btn">Explore Curriculum</a>
+                </div>
+
+                <div class="overview-image">
+                    <img src="https://placeholder.svg?height=400&width=600" alt="Machine Learning Fundamentals">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Section -->
+    <section id="curriculum" class="curriculum visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Curriculum</h2>
+                <p>A comprehensive learning path designed to develop your machine learning expertise</p>
+            </div>
+
+            <div class="curriculum-container">
+                <div class="module active">
+                    <div class="module-header">
+                        <div class="module-title">Module 1: Foundations of Machine Learning</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Build a strong foundation in the core concepts and mathematics behind machine learning.</p>
+                        <ul>
+                            <li>Introduction to machine learning and its applications</li>
+                            <li>Types of machine learning: supervised, unsupervised, and reinforcement learning</li>
+                            <li>Essential mathematics: linear algebra, calculus, probability, and statistics</li>
+                            <li>Python programming for machine learning</li>
+                            <li>Data manipulation with NumPy and Pandas</li>
+                            <li>Project: Exploratory data analysis and visualization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 2: Supervised Learning - Regression</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Master regression techniques for predicting continuous values.</p>
+                        <ul>
+                            <li>Linear regression and its variants</li>
+                            <li>Polynomial regression and feature engineering</li>
+                            <li>Regularization techniques: Ridge, Lasso, and Elastic Net</li>
+                            <li>Model evaluation metrics for regression</li>
+                            <li>Cross-validation and hyperparameter tuning</li>
+                            <li>Project: Housing price prediction model</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 3: Supervised Learning - Classification</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn classification algorithms for predicting categorical outcomes.</p>
+                        <ul>
+                            <li>Logistic regression and decision boundaries</li>
+                            <li>Decision trees and random forests</li>
+                            <li>Support Vector Machines (SVM)</li>
+                            <li>Naive Bayes classifiers</li>
+                            <li>Evaluation metrics: accuracy, precision, recall, F1-score, ROC curves</li>
+                            <li>Project: Customer churn prediction system</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 4: Unsupervised Learning</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Explore techniques for finding patterns in unlabeled data.</p>
+                        <ul>
+                            <li>Clustering algorithms: K-means, hierarchical, and DBSCAN</li>
+                            <li>Dimensionality reduction: PCA, t-SNE, and UMAP</li>
+                            <li>Anomaly detection techniques</li>
+                            <li>Association rule learning</li>
+                            <li>Evaluating unsupervised learning models</li>
+                            <li>Project: Customer segmentation and market basket analysis</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 5: Neural Networks & Deep Learning</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Dive into the foundations of neural networks and deep learning.</p>
+                        <ul>
+                            <li>Neural network architecture and components</li>
+                            <li>Activation functions and backpropagation</li>
+                            <li>Deep learning frameworks: TensorFlow and PyTorch</li>
+                            <li>Convolutional Neural Networks (CNNs) for image data</li>
+                            <li>Recurrent Neural Networks (RNNs) for sequential data</li>
+                            <li>Project: Image classification and text sentiment analysis</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 6: Advanced Machine Learning Techniques</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Explore advanced methods and specialized applications of machine learning.</p>
+                        <ul>
+                            <li>Ensemble methods: bagging, boosting, and stacking</li>
+                            <li>Feature selection and engineering techniques</li>
+                            <li>Handling imbalanced datasets</li>
+                            <li>Time series forecasting</li>
+                            <li>Natural Language Processing (NLP) fundamentals</li>
+                            <li>Project: Ensemble model for financial forecasting</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 7: Model Deployment & MLOps</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn how to deploy and maintain machine learning models in production.</p>
+                        <ul>
+                            <li>Model serialization and deployment options</li>
+                            <li>RESTful API development with Flask and FastAPI</li>
+                            <li>Containerization with Docker</li>
+                            <li>Model monitoring and maintenance</li>
+                            <li>Introduction to MLOps and CI/CD for ML</li>
+                            <li>Project: Deploying a machine learning model as a web service</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 8: Capstone Project & Career Preparation</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Apply everything you've learned in a comprehensive project and prepare for the job market.
+                        </p>
+                        <ul>
+                            <li>End-to-end machine learning project planning and execution</li>
+                            <li>Portfolio development and GitHub profile optimization</li>
+                            <li>Machine learning interview preparation</li>
+                            <li>Resume and LinkedIn profile for ML roles</li>
+                            <li>Job search strategies for machine learning positions</li>
+                            <li>Project: Complete ML solution addressing a real-world problem</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructors Section -->
+    <section id="instructors" class="instructors visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Your Instructors</h2>
+                <p>Learn from experienced machine learning engineers and data scientists</p>
+            </div>
+
+            <div class="overview-grid">
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Dr. Alex Chen">
+                    </div>
+                    <div class="instructor-info">
+                        <h3>Dr. Alex Chen</h3>
+                        <p class="position">Lead Instructor, ML Research Scientist</p>
+                        <p class="bio">Dr. Chen has over 10 years of experience in machine learning research and
+                            application. He previously worked as a Senior Research Scientist at Google AI and holds a
+                            Ph.D. in Computer Science with a focus on deep learning architectures.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Dr. Maya Patel">
+                    </div>
+                    <div class="instructor-info">
+                        <h3>Dr. Maya Patel</h3>
+                        <p class="position">ML Engineer, Industry Expert</p>
+                        <p class="bio">Dr. Patel leads the machine learning team at a Fortune 100 company and
+                            specializes in deploying ML systems at scale. She has implemented machine learning solutions
+                            across finance, healthcare, and e-commerce sectors.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-medium"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Pricing</h2>
+                <p>Flexible payment options to fit your budget</p>
+            </div>
+
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Basic</div>
+                        <div class="pricing-price">$2,499 <span>one-time payment</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Full course access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Course materials and datasets
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Certificate of completion</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Community access</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> 1-on-1 mentoring</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Career coaching</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Job placement assistance</div>
+                        </div>
+                        <a href="enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Professional</div>
+                        <div class="pricing-price">$3,499 <span>one-time payment</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Full course access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Course materials and datasets
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Certificate of completion</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Community access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> 1-on-1 mentoring (8 sessions)
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Career coaching</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Job placement assistance</div>
+                        </div>
+                        <a href="enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Payment Plan</div>
+                        <div class="pricing-price">$699 <span>per month for 4 months</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Full course access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Course materials and datasets
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Certificate of completion</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Community access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> 1-on-1 mentoring (4 sessions)
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Career coaching</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Job placement assistance</div>
+                        </div>
+                        <a href="enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Student Testimonials</h2>
+                <p>Hear what our graduates have to say about their experience</p>
+            </div>
+
+            <div class="testimonial-container">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"This course transformed my career. As a software developer with no ML experience, I was able
+                            to transition into a machine learning engineer role within 3 months of completing the
+                            program. The hands-on projects and real-world applications gave me exactly what I needed to
+                            stand out in interviews."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="Michael Torres">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Torres</h4>
+                            <p>Machine Learning Engineer at TechInnovate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The curriculum strikes the perfect balance between theory and practice. I appreciated how
+                            the instructors explained complex concepts in an accessible way while still diving deep into
+                            the mathematics when necessary. The capstone project became the centerpiece of my portfolio
+                            and helped me land multiple job offers."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="Jennifer Wu">
+                        </div>
+                        <div class="author-info">
+                            <h4>Jennifer Wu</h4>
+                            <p>AI Specialist at HealthTech Solutions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"As a data analyst looking to advance my career, this course gave me the skills to implement
+                            machine learning models that deliver real business value. I was able to apply what I learned
+                            immediately in my current role, which led to a promotion and a 35% salary increase within
+                            six months of completing the program."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="David Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>David Johnson</h4>
+                            <p>Senior Data Scientist at Finance Global</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our machine learning course</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        <span>What prerequisites are required for this course?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>This course requires intermediate Python programming skills and a basic understanding of
+                            mathematics (algebra, calculus, and probability). You should be comfortable with coding,
+                            data structures, and have some experience with data analysis. If you're new to Python, we
+                            recommend taking our Python for Data Science course first or completing the pre-course
+                            materials we provide.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How is this course different from other ML courses?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our course stands out by combining theoretical foundations with extensive hands-on practice.
+                            We focus on building complete machine learning pipelines rather than just implementing
+                            algorithms. The curriculum is constantly updated to reflect industry trends, and our
+                            instructors are active practitioners who bring real-world experience to the classroom.
+                            Additionally, our career support and mentorship programs are designed to help you transition
+                            into ML roles successfully.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How much time should I commit to the course each week?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You should expect to dedicate approximately 15-20 hours per week to the course. This includes
+                            attending live sessions, completing assignments, working on projects, and studying the
+                            materials. The course is designed to be manageable for those working full-time, but
+                            consistent effort is required to master the concepts and complete the projects successfully.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Will this course help me get a job in machine learning?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, this course is specifically designed to prepare you for roles in machine learning. The
+                            curriculum focuses on in-demand skills, and you'll build portfolio projects that demonstrate
+                            your abilities to potential employers. Our Professional and Payment Plan tiers include
+                            career coaching and job placement assistance. Many of our graduates have successfully
+                            transitioned into machine learning engineer, data scientist, and AI specialist roles at
+                            leading companies.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What software or tools will I need for this course?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You'll need a computer (Windows, Mac, or Linux) with at least 8GB of RAM (16GB recommended)
+                            and a reliable internet connection. All software used in the course is free and open-source.
+                            We'll guide you through installing Python, Jupyter Notebooks, and all necessary libraries.
+                            For deep learning modules, we provide access to cloud-based GPU resources, so you won't need
+                            specialized hardware.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there any certification upon completion?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all students who successfully complete the course requirements will receive a
+                            certificate of completion from Advanced AI School. This certificate details the skills
+                            you've mastered and can be added to your LinkedIn profile and resume. However, your
+                            portfolio of projects will be the most valuable credential for potential employers, and we
+                            focus heavily on helping you build impressive project work throughout the course.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta visible">
+        <div class="container">
+            <h2>Ready to Master Machine Learning?</h2>
+            <p>Enroll today and take the first step toward becoming a machine learning professional. Limited spots
+                available for our next cohort starting soon!</p>
+            <a href="enroll.html" class="btn btn-lg">Enroll Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-logo">Advanced<span>.</span></h3>
+                    <p class="footer-text">Advanced is a premier institution offering cutting-edge courses in artificial
+                        intelligence, machine learning, and computer science.</p>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../courses.html">Courses</a></li>
+                        <li><a href="../advanced.html#features">Features</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../advanced.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="webdev.html">Web Development</a></li>
+                        <li><a href="data.html">Data Analysis</a></li>
+                        <li><a href="ml.html">Machine Learning</a></li>
+                        <li><a href="ai.html">Artificial Intelligence</a></li>
+                        <li><a href="cloud.html">Cloud Computing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="../privacy.html">Privacy Policy</a></li>
+                        <li><a href="../privacy.html">Terms & Conditions</a></li>
+                        <li><a href="../documentation.html">Documentation</a></li>
+                        <li><a href="../support.html">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Advanced AI School. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-links">
+            <div class="bottom-nav-item">
+                <a href="../advanced.html" class="bottom-nav-icon">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../courses.html" class="bottom-nav-icon active">
+                    <i class="fas fa-book"></i>
+                    <span>Courses</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../about.html" class="bottom-nav-icon">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../advanced.html#contact" class="bottom-nav-icon">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or use device preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Set initial theme
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        } else if (prefersDark) {
+            htmlElement.setAttribute('data-theme', 'dark');
+            updateThemeIcon('dark');
+        }
+
+        // Toggle theme function
+        function toggleTheme() {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        // Update theme icon
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-moon';
+            } else {
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        // Add event listener to theme toggle button
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Sticky Header
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Module Toggle
+        const moduleHeaders = document.querySelectorAll('.module-header');
+
+        moduleHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const module = header.parentElement;
+                module.classList.toggle('active');
+            });
+        });
+
+        // FAQ Toggle
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initialize page with all sections visible
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('visible');
+        });
+    </script>
+</body>
+
+</html>

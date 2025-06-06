@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Library - Advanced Language & Computer School</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Theme Variables */
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #fff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --accent-color: #4a6cf7;
+            --accent-light: rgba(74, 108, 247, 0.1);
+            --border-color: #e2e8f0;
+            --card-bg: #fff;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            --footer-bg: #2d3748;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --bottom-nav-bg: #fff;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark Theme */
+        html[data-theme='dark'] {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --accent-color: #5a78ff;
+            --accent-light: rgba(90, 120, 255, 0.2);
+            --border-color: #4a5568;
+            --card-bg: #2d3748;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            --footer-bg: #171923;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(26, 32, 44, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --bottom-nav-bg: #1a202c;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--accent-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .theme-toggle i {
+            font-size: 18px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), var(--accent-light));
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), var(--accent-light));
+            bottom: -100px;
+            left: -100px;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Search and Filter */
+        .search-filter {
+            background: var(--bg-primary);
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-container {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            padding-right: 50px;
+            border-radius: 30px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234a6cf7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .upload-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        /* Books Grid */
+        .books-section {
+            background: var(--bg-secondary);
+            padding: 60px 0;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .book-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-cover {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .book-card:hover .book-cover img {
+            transform: scale(1.05);
+        }
+
+        .book-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .book-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .book-author {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .book-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 14px;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .book-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .book-size,
+        .book-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .book-download,
+        .book-preview {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .book-download:hover,
+        .book-preview:hover {
+            background: var(--accent-light);
+            color: var(--accent-color);
+        }
+
+        .book-uploader {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .view-all {
+            color: var(--accent-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .view-all:hover {
+            text-decoration: underline;
+        }
+
+        .view-all i {
+            font-size: 14px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .empty-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .empty-text {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Upload Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .modal-close:hover {
+            background: var(--accent-light);
+            color: var(--accent-color);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234a6cf7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .file-upload {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 150px;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .file-upload:hover {
+            border-color: var(--accent-color);
+            background: var(--accent-light);
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .upload-icon {
+            font-size: 36px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .upload-hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .cover-upload {
+            height: 120px;
+        }
+
+        .modal-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .btn-cancel {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: none;
+        }
+
+        .btn-cancel:hover {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-submit {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-color);
+            opacity: 0.9;
+        }
+
+        .file-preview {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .file-preview.active {
+            display: block;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--bg-secondary);
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+
+        .file-icon {
+            font-size: 24px;
+            color: var(--accent-color);
+        }
+
+        .file-details {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 300px;
+        }
+
+        .file-size {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .file-remove {
+            color: #e53e3e;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-remove:hover {
+            color: #c53030;
+        }
+
+        .cover-preview {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .cover-preview.active {
+            display: block;
+        }
+
+        .cover-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .pagination-list {
+            display: flex;
+            gap: 10px;
+        }
+
+        .pagination-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
+        }
+
+        .pagination-item:hover {
+            background: var(--accent-light);
+            color: var(--accent-color);
+        }
+
+        .pagination-item.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .pagination-arrow {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
+        }
+
+        .pagination-arrow:hover {
+            background: var(--accent-light);
+            color: var(--accent-color);
+        }
+
+        .pagination-arrow.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bottom-nav-bg);
+            box-shadow: var(--bottom-nav-shadow);
+            z-index: 999;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .bottom-nav-links {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .bottom-nav-item {
+            text-align: center;
+        }
+
+        .bottom-nav-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .bottom-nav-icon i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .bottom-nav-icon span {
+            font-size: 12px;
+        }
+
+        .bottom-nav-icon:hover,
+        .bottom-nav-icon.active {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 100px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+
+        .footer-text {
+            color: var(--footer-secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--footer-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #4a5568;
+            color: var(--footer-secondary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .search-filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-container {
+                width: 100%;
+            }
+
+            .filter-container {
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 250px;
+                height: 100vh;
+                background: var(--bg-primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                font-size: 24px;
+            }
+
+            .hero {
+                text-align: center;
+                padding-top: 80px;
+                height: auto;
+                min-height: 30vh;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .books-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .book-cover {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+
+            .filter-container {
+                flex-direction: column;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .upload-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .book-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .book-info {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .book-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+            }
+
+            .modal-footer .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="advanced.html" class="logo">Advanced<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="advanced.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="books.html" class="active">Books</a></li>
+                    <li><a href="advanced.html#contact">Contact</a></li>
+                </ul>
+                <div class="header-right">
+                    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="books-hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Books <span>Library</span></h1>
+                <p>Discover, download, and share educational resources with our community</p>
+                <button class="btn" id="uploadBookBtn">Upload a Book</button>
+                <a href="#my-uploads" class="btn btn-secondary">My Uploads</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section id="search-filter" class="search-filter visible">
+        <div class="container">
+            <div class="search-filter-container">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search for books...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="filter-container">
+                    <select class="filter-select" id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="programming">Programming</option>
+                        <option value="language">Language Learning</option>
+                        <option value="business">Business</option>
+                        <option value="design">Design</option>
+                        <option value="science">Science & Math</option>
+                    </select>
+                    <select class="filter-select" id="sortFilter">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="az">A-Z</option>
+                        <option value="za">Z-A</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Books Section -->
+    <section id="featured-books" class="books-section visible">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Books</h2>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Python Programming">
+                        <span class="book-category">Programming</span>
+                    </div>
+                    <div class="book-content">
+                        <h3 class="book-title">Python Programming: A Comprehensive Guide</h3>
+                        <p class="book-author">By John Smith</p>
+                        <p class="book-description">Learn Python programming from scratch with this comprehensive guide
+                            covering all the essential concepts, data structures, and practical applications.</p>
+                        <div class="book-meta">
+                            <div class="book-info">
+                                <span class="book-size"><i class="fas fa-file-pdf"></i> 12.5 MB</span>
+                                <span class="book-date"><i class="fas fa-calendar-alt"></i> Jan 15, 2023</span>
+                            </div>
+                            <div class="book-actions">
+                                <a href="#" class="book-download" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="#" class="book-preview" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="book-uploader">Uploaded by Advanced School</p>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Web Development">
+                        <span class="book-category">Programming</span>
+                    </div>
+                    <div class="book-content">
+                        <h3 class="book-title">Modern Web Development with JavaScript</h3>
+                        <p class="book-author">By Sarah Johnson</p>
+                        <p class="book-description">Master modern web development techniques using JavaScript, HTML5,
+                            CSS3, and popular frameworks like React, Angular, and Vue.</p>
+                        <div class="book-meta">
+                            <div class="book-info">
+                                <span class="book-size"><i class="fas fa-file-pdf"></i> 15.2 MB</span>
+                                <span class="book-date"><i class="fas fa-calendar-alt"></i> Mar 22, 2023</span>
+                            </div>
+                            <div class="book-actions">
+                                <a href="#" class="book-download" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="#" class="book-preview" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="book-uploader">Uploaded by Advanced School</p>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Business English">
+                        <span class="book-category">Language</span>
+                    </div>
+                    <div class="book-content">
+                        <h3 class="book-title">Business English: Communication Skills for Professionals</h3>
+                        <p class="book-author">By Michael Chen</p>
+                        <p class="book-description">Improve your business English skills with this practical guide
+                            focused on professional communication, presentations, and negotiations.</p>
+                        <div class="book-meta">
+                            <div class="book-info">
+                                <span class="book-size"><i class="fas fa-file-pdf"></i> 8.7 MB</span>
+                                <span class="book-date"><i class="fas fa-calendar-alt"></i> Feb 10, 2023</span>
+                            </div>
+                            <div class="book-actions">
+                                <a href="#" class="book-download" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="#" class="book-preview" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="book-uploader">Uploaded by Advanced School</p>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Data Science">
+                        <span class="book-category">Science</span>
+                    </div>
+                    <div class="book-content">
+                        <h3 class="book-title">Data Science Fundamentals: From Theory to Practice</h3>
+                        <p class="book-author">By Elena Rodriguez</p>
+                        <p class="book-description">A comprehensive introduction to data science covering statistics,
+                            machine learning, data visualization, and practical applications with Python.</p>
+                        <div class="book-meta">
+                            <div class="book-info">
+                                <span class="book-size"><i class="fas fa-file-pdf"></i> 18.3 MB</span>
+                                <span class="book-date"><i class="fas fa-calendar-alt"></i> Apr 5, 2023</span>
+                            </div>
+                            <div class="book-actions">
+                                <a href="#" class="book-download" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="#" class="book-preview" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="book-uploader">Uploaded by Advanced School</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Uploads Section -->
+    <section id="my-uploads" class="books-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>My Uploads</h2>
+                <button class="btn btn-sm" id="uploadBookBtn2">
+                    <i class="fas fa-plus"></i> Upload New Book
+                </button>
+            </div>
+            <div id="myUploadsContainer">
+                <!-- Empty state initially -->
+                <div class="empty-state" id="emptyMyUploads">
+                    <div class="empty-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="empty-title">No Books Uploaded Yet</h3>
+                    <p class="empty-text">You haven't uploaded any books yet. Share your knowledge with the community by
+                        uploading your first book.</p>
+                    <button class="btn" id="uploadBookBtn3">Upload a Book</button>
+                </div>
+
+                <!-- Books grid will be populated here by JavaScript -->
+                <div class="books-grid" id="myUploadsGrid" style="display: none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Uploads Section -->
+    <section id="community-uploads" class="books-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Community Uploads</h2>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Spanish Learning">
+                        <span class="book-category">Language</span>
+                    </div>
+                    <div class="book-content">
+                        <h3 class="book-title">Spanish for Beginners: A Step-by-Step Guide</h3>
+                        <p class="book-author">By Maria Gonzalez</p>
+                        <p class="book-description">Start your Spanish language journey with this beginner-friendly
+                            guide covering vocabulary, grammar, and practical conversations.</p>
+                        <div class="book-meta">
+                            <div class="book-info">
+                                <span class="book-size"><i class="fas fa-file-pdf"></i> 10.1 MB</span>
+                                <span class="book-date"><i class="fas fa-calendar-alt"></i> May 12, 2023</span>
+                            </div>
+                            <div class="book-actions">
+                                <a href="#" class="book-download" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="#" class="book-preview" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="book-uploader">Uploaded by User123</p>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="UI Design">
+                        <span class="book-category">Design</span>
+                    </div>
+                    <div class="book-content">
+                        <h3 class="book-title">UI/UX Design Principles and Best Practices</h3>
+                        <p class="book-author">By Alex Turner</p>
+                        <p class="book-description">Learn the fundamentals of user interface and user experience design
+                            with practical examples and case studies from industry experts.</p>
+                        <div class="book-meta">
+                            <div class="book-info">
+                                <span class="book-size"><i class="fas fa-file-pdf"></i> 14.8 MB</span>
+                                <span class="book-date"><i class="fas fa-calendar-alt"></i> Jun 3, 2023</span>
+                            </div>
+                            <div class="book-actions">
+                                <a href="#" class="book-download" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="#" class="book-preview" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="book-uploader">Uploaded by DesignPro</p>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Marketing">
+                        <span class="book-category">Business</span>
+                    </div>
+                    <div class="book-content">
+                        <h3 class="book-title">Digital Marketing Strategies for Small Businesses</h3>
+                        <p class="book-author">By David Wilson</p>
+                        <p class="book-description">A practical guide to digital marketing for small businesses,
+                            covering social media, SEO, content marketing, and advertising on a budget.</p>
+                        <div class="book-meta">
+                            <div class="book-info">
+                                <span class="book-size"><i class="fas fa-file-pdf"></i> 9.5 MB</span>
+                                <span class="book-date"><i class="fas fa-calendar-alt"></i> Apr 18, 2023</span>
+                            </div>
+                            <div class="book-actions">
+                                <a href="#" class="book-download" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="#" class="book-preview" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="book-uploader">Uploaded by MarketingGuru</p>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Machine Learning">
+                        <span class="book-category">Science</span>
+                    </div>
+                    <div class="book-content">
+                        <h3 class="book-title">Introduction to Machine Learning with Python</h3>
+                        <p class="book-author">By Robert Chen</p>
+                        <p class="book-description">Get started with machine learning using Python and popular libraries
+                            like scikit-learn, TensorFlow, and Keras with hands-on examples.</p>
+                        <div class="book-meta">
+                            <div class="book-info">
+                                <span class="book-size"><i class="fas fa-file-pdf"></i> 16.2 MB</span>
+                                <span class="book-date"><i class="fas fa-calendar-alt"></i> Mar 7, 2023</span>
+                            </div>
+                            <div class="book-actions">
+                                <a href="#" class="book-download" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <a href="#" class="book-preview" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="book-uploader">Uploaded by AIEnthusiast</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="pagination-arrow disabled">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+                <ul class="pagination-list">
+                    <li class="pagination-item active">1</li>
+                    <li class="pagination-item">2</li>
+                    <li class="pagination-item">3</li>
+                    <li class="pagination-item">4</li>
+                    <li class="pagination-item">5</li>
+                </ul>
+                <a href="#" class="pagination-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Book Modal -->
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Upload a Book</h3>
+                <div class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form id="uploadBookForm">
+                    <div class="form-group">
+                        <label for="bookTitle" class="form-label">Book Title</label>
+                        <input type="text" id="bookTitle" name="bookTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookAuthor" class="form-label">Author</label>
+                        <input type="text" id="bookAuthor" name="bookAuthor" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookCategory" class="form-label">Category</label>
+                        <select id="bookCategory" name="bookCategory" class="form-select" required>
+                            <option value="">Select a category</option>
+                            <option value="programming">Programming</option>
+                            <option value="language">Language Learning</option>
+                            <option value="business">Business</option>
+                            <option value="design">Design</option>
+                            <option value="science">Science & Math</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookDescription" class="form-label">Description</label>
+                        <textarea id="bookDescription" name="bookDescription" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Book File (PDF, EPUB, MOBI)</label>
+                        <label class="file-upload">
+                            <input type="file" id="bookFile" name="bookFile" accept=".pdf,.epub,.mobi" required>
+                            <div class="upload-content">
+                                <div class="upload-icon">
+                                    <i class="fas fa-file-upload"></i>
+                                </div>
+                                <p class="upload-text">Drag & drop your file here or click to browse</p>
+                                <p class="upload-hint">Maximum file size: 50MB</p>
+                            </div>
+                        </label>
+                        <div class="file-preview" id="filePreview">
+                            <div class="file-info">
+                                <div class="file-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="file-details">
+                                    <p class="file-name" id="fileName">filename.pdf</p>
+                                    <p class="file-size" id="fileSize">0 MB</p>
+                                </div>
+                                <div class="file-remove" id="removeFile">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Book Cover Image</label>
+                        <label class="file-upload cover-upload">
+                            <input type="file" id="coverImage" name="coverImage" accept="image/*">
+                            <div class="upload-content">
+                                <div class="upload-icon">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <p class="upload-text">Upload a cover image (optional)</p>
+                                <p class="upload-hint">Recommended size: 500x700px</p>
+                            </div>
+                        </label>
+                        <div class="cover-preview" id="coverPreview">
+                            <img id="coverPreviewImg" src="/placeholder.svg" alt="Cover Preview">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel" id="cancelUpload">Cancel</button>
+                <button class="btn btn-submit" id="submitUpload">Upload Book</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-logo">Advanced<span>.</span></h3>
+                    <p class="footer-text">Advanced is a premier institution offering cutting-edge courses in
+                        programming languages and computer science.</p>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="advanced.html">Home</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="advanced.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="courses/webdev.html">Web Development</a></li>
+                        <li><a href="courses/data.html">Data Science</a></li>
+                        <li><a href="courses/mobile.html">Mobile App Development</a></li>
+                        <li><a href="courses/business.html">Business English</a></li>
+                        <li><a href="courses/technical.html">Technical Writing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html#faq">FAQ</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="privacy.html">Terms & Conditions</a></li>
+                        <li><a href="documentation&sup.html">Documentation</a></li>
+                        <li><a href="documentation&sup.html">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Advanced Language & Computer School. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-links">
+            <div class="bottom-nav-item">
+                <a href="advanced.html" class="bottom-nav-icon">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="courses.html" class="bottom-nav-icon">
+                    <i class="fas fa-book"></i>
+                    <span>Courses</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="about.html" class="bottom-nav-icon">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="advanced.html#contact" class="bottom-nav-icon">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or use device preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Set initial theme
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        } else if (prefersDark) {
+            htmlElement.setAttribute('data-theme', 'dark');
+            updateThemeIcon('dark');
+        }
+
+        // Toggle theme function
+        function toggleTheme() {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        // Update theme icon
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-moon';
+            } else {
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        // Add event listener to theme toggle button
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Sticky Header
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Modal Functionality
+        const uploadModal = document.getElementById('uploadModal');
+        const uploadBookBtns = document.querySelectorAll('#uploadBookBtn, #uploadBookBtn2, #uploadBookBtn3');
+        const closeModalBtn = document.getElementById('closeModal');
+        const cancelUploadBtn = document.getElementById('cancelUpload');
+        const submitUploadBtn = document.getElementById('submitUpload');
+
+        // Open modal
+        uploadBookBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                uploadModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+            });
+        });
+
+        // Close modal
+        function closeModal() {
+            uploadModal.classList.remove('active');
+            document.body.style.overflow = ''; // Re-enable scrolling
+            resetForm();
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelUploadBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside
+        uploadModal.addEventListener('click', (e) => {
+            if (e.target === uploadModal) {
+                closeModal();
+            }
+        });
+
+        // File Upload Preview
+        const bookFileInput = document.getElementById('bookFile');
+        const filePreview = document.getElementById('filePreview');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const removeFileBtn = document.getElementById('removeFile');
+
+        bookFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                fileName.textContent = file.name;
+                fileSize.textContent = formatFileSize(file.size);
+                filePreview.classList.add('active');
+            }
+        });
+
+        removeFileBtn.addEventListener('click', () => {
+            bookFileInput.value = '';
+            filePreview.classList.remove('active');
+        });
+
+        // Cover Image Preview
+        const coverImageInput = document.getElementById('coverImage');
+        const coverPreview = document.getElementById('coverPreview');
+        const coverPreviewImg = document.getElementById('coverPreviewImg');
+
+        coverImageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    coverPreviewImg.src = e.target.result;
+                    coverPreview.classList.add('active');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('uploadBookForm').reset();
+            filePreview.classList.remove('active');
+            coverPreview.classList.remove('active');
+        }
+
+        // Handle form submission
+        submitUploadBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Form validation
+            const title = document.getElementById('bookTitle').value;
+            const author = document.getElementById('bookAuthor').value;
+            const category = document.getElementById('bookCategory').value;
+            const description = document.getElementById('bookDescription').value;
+            const bookFile = document.getElementById('bookFile').files[0];
+
+            if (!title || !author || !category || !description || !bookFile) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Get cover image or use placeholder
+            let coverSrc = 'https://placeholder.svg?height=250&width=250';
+            if (coverImageInput.files[0]) {
+                coverSrc = URL.createObjectURL(coverImageInput.files[0]);
+            }
+
+            // Create book card
+            const bookCard = createBookCard({
+                title,
+                author,
+                category,
+                description,
+                fileSize: formatFileSize(bookFile.size),
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+                coverSrc,
+                uploader: 'You'
+            });
+
+            // Add to My Uploads
+            const myUploadsGrid = document.getElementById('myUploadsGrid');
+            const emptyState = document.getElementById('emptyMyUploads');
+
+            // Hide empty state and show grid if this is the first upload
+            if (emptyState.style.display !== 'none') {
+                emptyState.style.display = 'none';
+                myUploadsGrid.style.display = 'grid';
+            }
+
+            // Add new book to the beginning of the grid
+            myUploadsGrid.insertBefore(bookCard, myUploadsGrid.firstChild);
+
+            // Close modal and reset form
+            closeModal();
+
+            // Show success message
+            alert('Book uploaded successfully!');
+
+            // Scroll to My Uploads section
+            document.getElementById('my-uploads').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Create book card function
+        function createBookCard(book) {
+            const bookCard = document.createElement('div');
+            bookCard.className = 'book-card';
+
+            bookCard.innerHTML = `
+                <div class="book-cover">
+                    <img src="${book.coverSrc}" alt="${book.title}">
+                    <span class="book-category">${getCategoryName(book.category)}</span>
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">${book.title}</h3>
+                    <p class="book-author">By ${book.author}</p>
+                    <p class="book-description">${book.description}</p>
+                    <div class="book-meta">
+                        <div class="book-info">
+                            <span class="book-size"><i class="fas fa-file-pdf"></i> ${book.fileSize}</span>
+                            <span class="book-date"><i class="fas fa-calendar-alt"></i> ${book.date}</span>
+                        </div>
+                        <div class="book-actions">
+                            <a href="#" class="book-download" title="Download">
+                                <i class="fas fa-download"></i>
+                            </a>
+                            <a href="#" class="book-preview" title="Preview">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="book-uploader">Uploaded by ${book.uploader}</p>
+                </div>
+            `;
+
+            return bookCard;
+        }
+
+        // Get category display name
+        function getCategoryName(categoryValue) {
+            const categories = {
+                'programming': 'Programming',
+                'language': 'Language',
+                'business': 'Business',
+                'design': 'Design',
+                'science': 'Science',
+                'other': 'Other'
+            };
+
+            return categories[categoryValue] || categoryValue;
+        }
+
+        // Filter functionality
+        const categoryFilter = document.getElementById('categoryFilter');
+        const sortFilter = document.getElementById('sortFilter');
+        const searchInput = document.querySelector('.search-input');
+
+        // Add event listeners for filters
+        categoryFilter.addEventListener('change', applyFilters);
+        sortFilter.addEventListener('change', applyFilters);
+        searchInput.addEventListener('input', applyFilters);
+
+        function applyFilters() {
+            // In a real application, this would filter the books based on the selected criteria
+            // For this demo, we'll just log the filter values
+            console.log('Category:', categoryFilter.value);
+            console.log('Sort:', sortFilter.value);
+            console.log('Search:', searchInput.value);
+
+            // You would typically make an API call here or filter the existing books
+        }
+
+        // Pagination
+        const paginationItems = document.querySelectorAll('.pagination-item');
+
+        paginationItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all items
+                paginationItems.forEach(i => i.classList.remove('active'));
+
+                // Add active class to clicked item
+                item.classList.add('active');
+
+                // In a real application, this would load the corresponding page of books
+            });
+        });
+
+        // Scroll Animation
+        function checkSections() {
+            const sections = document.querySelectorAll('section');
+            const triggerBottom = window.innerHeight * 0.8;
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+
+                if (sectionTop < triggerBottom) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkSections);
+        window.addEventListener('load', checkSections);
+
+        // Initialize page with first section visible
+        document.querySelector('section').classList.add('visible');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes borderGlow {
+            0% {
+                box-shadow: 0 0 5px rgba(128, 0, 128, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 15px rgba(128, 0, 128, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 5px rgba(128, 0, 128, 0.3);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        body {
+            background: linear-gradient(135deg, #121212, #1a1a1a, #121212);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Card styles */
+        .card {
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin-top: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(60, 60, 60, 0.5);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-header {
+            padding: 24px;
+            border-bottom: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(128, 0, 128, 0.5), transparent);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4a1d4a, #8c3a8c);
+            transition: width 0.3s ease;
+        }
+
+        .card:hover .card-title::after {
+            width: 100%;
+        }
+
+        .card-description {
+            color: #aaa;
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .card-footer {
+            padding: 16px 24px;
+            background-color: rgba(37, 37, 37, 0.8);
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #888;
+        }
+
+        /* Form styles */
+        .form-group {
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .form-group:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .form-group:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .form-group:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .form-group:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .form-group:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .form-group:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .form-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-left: 5px;
+        }
+
+        label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            background: #6b3a6b;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        input:focus+label::before,
+        select:focus+label::before {
+            width: 6px;
+            height: 6px;
+            opacity: 1;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        input::placeholder {
+            color: #777;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        input:focus::placeholder {
+            opacity: 0.5;
+            transform: translateX(10px);
+        }
+
+        input:hover,
+        select:hover {
+            background-color: #333;
+            border-color: #555;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #6b3a6b;
+            box-shadow: 0 0 0 3px rgba(107, 58, 107, 0.2);
+            background-color: #2d2d2d;
+            transform: translateY(-2px);
+        }
+
+        .input-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .input-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #4a1d4a, #8c3a8c);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .input-wrapper:focus-within::after {
+            transform: scaleX(1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            position: relative;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-group:hover {
+            background-color: rgba(60, 60, 60, 0.3);
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            accent-color: #6b3a6b;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .checkbox-group input[type="checkbox"]:hover {
+            transform: scale(1.2);
+        }
+
+        .checkbox-group label {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .checkbox-group:hover label {
+            color: #d0d0d0;
+        }
+
+        button {
+            background: linear-gradient(135deg, #3a3a3a, #444);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #444, #555);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        button:focus {
+            animation: borderGlow 2s infinite;
+        }
+
+        button:active::after {
+            animation: ripple 0.6s linear;
+        }
+
+        button:disabled {
+            background: #333;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #6b3a6b;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .success-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .success-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6b3a6b, transparent);
+        }
+
+        .success-text {
+            font-size: 1.125rem;
+            margin-bottom: 24px;
+        }
+
+        .next-steps {
+            background-color: rgba(37, 37, 37, 0.8);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: left;
+            border: 1px solid #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .next-steps:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: #444;
+        }
+
+        .next-steps h3 {
+            margin-bottom: 16px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .next-steps h3::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #4a1d4a, transparent);
+        }
+
+        .next-steps ul {
+            padding-left: 20px;
+        }
+
+        .next-steps li {
+            margin-bottom: 8px;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .next-steps li:hover {
+            transform: translateX(5px);
+        }
+
+        .next-steps li::before {
+            content: '•';
+            position: absolute;
+            left: -15px;
+            color: #6b3a6b;
+            transition: transform 0.2s ease;
+        }
+
+        .next-steps li:hover::before {
+            transform: scale(1.5);
+        }
+
+        .error {
+            color: #e57373;
+            font-size: 0.875rem;
+            margin-top: 4px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* File upload styles */
+        .file-upload {
+            border: 2px dashed #444;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            background-color: rgba(37, 37, 37, 0.8);
+            overflow: hidden;
+        }
+
+        .file-upload::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(107, 58, 107, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            transform: scale(0.5);
+        }
+
+        .file-upload:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .file-upload.highlight {
+            border-color: #6b3a6b;
+            background-color: rgba(107, 58, 107, 0.1);
+            transform: scale(1.02);
+        }
+
+        .file-upload-label {
+            display: block;
+            cursor: pointer;
+            padding: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .file-upload:hover .file-upload-label {
+            transform: translateY(-3px);
+        }
+
+        .file-upload-input {
+            position: absolute;
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .file-upload-icon {
+            font-size: 2.5rem;
+            color: #888;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .file-upload:hover .file-upload-icon {
+            transform: scale(1.2);
+            color: #aaa;
+        }
+
+        .file-upload-text {
+            font-size: 1rem;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .file-upload:hover .file-upload-text {
+            color: #d0d0d0;
+        }
+
+        .file-upload-info {
+            font-size: 0.875rem;
+            color: #777;
+            margin-top: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .file-upload:hover .file-upload-info {
+            color: #999;
+        }
+
+        .file-preview {
+            display: none;
+            margin-top: 16px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .file-preview-content {
+            display: flex;
+            align-items: center;
+            background-color: rgba(37, 37, 37, 0.8);
+            border-radius: 4px;
+            padding: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        .file-preview-content:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-color: #444;
+        }
+
+        .file-preview-icon {
+            font-size: 1.5rem;
+            margin-right: 12px;
+            color: #aaa;
+            transition: transform 0.3s ease;
+        }
+
+        .file-preview-content:hover .file-preview-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .file-preview-info {
+            flex: 1;
+        }
+
+        .file-preview-name {
+            font-weight: 500;
+            margin-bottom: 4px;
+            word-break: break-all;
+            transition: color 0.3s ease;
+        }
+
+        .file-preview-content:hover .file-preview-name {
+            color: #d0d0d0;
+        }
+
+        .file-preview-size {
+            font-size: 0.75rem;
+            color: #888;
+            transition: color 0.3s ease;
+        }
+
+        .file-preview-content:hover .file-preview-size {
+            color: #aaa;
+        }
+
+        .file-preview-remove {
+            background: none;
+            border: none;
+            color: #e57373;
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 4px;
+            width: auto;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .file-preview-remove:hover {
+            background-color: rgba(229, 115, 115, 0.1);
+            color: #ef5350;
+            transform: rotate(90deg);
+        }
+
+        .file-preview-image {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 4px;
+            margin-top: 12px;
+            border: 1px solid #444;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .file-preview-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .card-footer {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+
+        /* Secondary button style */
+        .btn-secondary {
+            background: transparent;
+            color: #aaa;
+            border: 1px solid #444;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(60, 60, 60, 0.3);
+            border-color: #555;
+            color: #d0d0d0;
+        }
+
+        /* Page title animation */
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, #6b3a6b, transparent);
+            transition: width 0.3s ease;
+        }
+
+        h1:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Enroll in Web Development Masterclass</h1>
+
+        <div class="card" id="enrollment-form">
+            <div class="card-header">
+                <h2 class="card-title">Complete Your Enrollment</h2>
+                <p class="card-description">Please provide your information to enroll in this course</p>
+            </div>
+            <div class="card-content">
+                <form id="enrollForm">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="input-wrapper">
+                                <input type="text" id="firstName" placeholder="John" required>
+                            </div>
+                            <label for="firstName">First Name</label>
+                            <div class="error" id="firstNameError">Please enter your first name</div>
+                        </div>
+                        <div class="form-col">
+                            <div class="input-wrapper">
+                                <input type="text" id="lastName" placeholder="Doe" required>
+                            </div>
+                            <label for="lastName">Last Name</label>
+                            <div class="error" id="lastNameError">Please enter your last name</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input type="email" id="email" placeholder="john.doe@example.com" required>
+                        </div>
+                        <label for="email">Email Address</label>
+                        <div class="error" id="emailError">Please enter a valid email address</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input type="tel" id="phone" placeholder="+1 (555) 123-4567">
+                        </div>
+                        <label for="phone">Phone Number</label>
+                        <div class="error" id="phoneError">Please enter a valid phone number</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <select id="paymentMethod" required>
+                                <option value="">Select payment method</option>
+                                <option value="credit-card">Mpesa</option>
+                                <option value="paypal">Telebirr</option>
+                                <option value="bank-transfer">Bank Transfer</option>
+                            </select>
+                        </div>
+                        <label for="paymentMethod">Payment Method</label>
+                        <div class="error" id="paymentMethodError">Please select a payment method</div>
+                    </div>
+
+                    <!-- Receipt Upload Section -->
+                    <div class="form-group">
+                        <label>Upload Payment Receipt</label>
+                        <div class="file-upload" id="fileUploadArea">
+                            <label for="receiptFile" class="file-upload-label">
+                                <div class="file-upload-icon">📄</div>
+                                <div class="file-upload-text">Drag & drop your receipt here or click to browse</div>
+                                <div class="file-upload-info">Accepts screenshots (PNG, JPG) or PDF files</div>
+                                <input type="file" id="receiptFile" class="file-upload-input"
+                                    accept=".jpg,.jpeg,.png,.pdf">
+                            </label>
+                        </div>
+                        <div class="file-preview" id="filePreview">
+                            <div class="file-preview-content">
+                                <div class="file-preview-icon" id="fileTypeIcon"></div>
+                                <div class="file-preview-info">
+                                    <div class="file-preview-name" id="fileName"></div>
+                                    <div class="file-preview-size" id="fileSize"></div>
+                                </div>
+                                <button type="button" class="file-preview-remove" id="removeFile">×</button>
+                            </div>
+                            <img id="imagePreview" class="file-preview-image" style="display: none;">
+                        </div>
+                        <div class="error" id="fileError">Please upload a valid receipt file or screenshot (PNG, JPG, or
+                            PDF)</div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the <a href="../privacy.html" target="_blank">terms and
+                                conditions</a> and <a href="../privacy.html" target="_blank">privacy policy</a></label>
+                    </div>
+                    <div class="error" id="termsError">You must agree to the terms and conditions</div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter">
+                        <label for="newsletter">Send me updates about new courses and promotions</label>
+                    </div>
+
+                    <button type="submit" id="submitBtn">Complete Enrollment</button>
+                </form>
+            </div>
+            <div class="card-footer">
+                <p>Secure payment processing</p>
+                <p>30-day money-back guarantee</p>
+            </div>
+        </div>
+
+        <div class="card success-message" id="success-message">
+            <div class="card-content">
+                <div class="success-icon">✓</div>
+                <h2 class="success-title">Successfuly ordered!</h2>
+                <p class="success-text">Thank you for enrolling in the Web Development Masterclass. We're excited to
+                    have you join us!</p>
+
+                <div class="next-steps">
+                    <h3>What's Next?</h3>
+                    <ul>
+                        <li>Go to the nearest Advanced language and computer school and then contact the manager.</li>
+                        <li>Set up your student profile to track your progress</li>
+                        <li>Join our student community for support and networking</li>
+                        <li>Start your journey today.</li>
+                    </ul>
+                </div>
+
+                <button class="btn-secondary" style="margin-top: 12px;"><a href="/courses.html">Return to
+                        Courses</a></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('enrollForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const fileInput = document.getElementById('receiptFile');
+            const fileUploadArea = document.getElementById('fileUploadArea');
+            const filePreview = document.getElementById('filePreview');
+            const fileName = document.getElementById('fileName');
+            const fileSize = document.getElementById('fileSize');
+            const fileTypeIcon = document.getElementById('fileTypeIcon');
+            const removeFileBtn = document.getElementById('removeFile');
+            const imagePreview = document.getElementById('imagePreview');
+            const fileError = document.getElementById('fileError');
+
+            // Add ripple effect to button
+            document.querySelectorAll('button').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    const x = e.clientX - e.target.getBoundingClientRect().left;
+                    const y = e.clientY - e.target.getBoundingClientRect().top;
+
+                    const ripple = document.createElement('span');
+                    ripple.style.position = 'absolute';
+                    ripple.style.width = '1px';
+                    ripple.style.height = '1px';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+                    ripple.style.transform = 'scale(0)';
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    ripple.style.animation = 'ripple 0.6s linear';
+
+                    this.appendChild(ripple);
+
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // File upload handling
+            fileInput.addEventListener('change', handleFileSelect);
+
+            // Drag and drop functionality
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                fileUploadArea.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                fileUploadArea.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                fileUploadArea.addEventListener(eventName, unhighlight, false);
+            });
+
+            function highlight() {
+                fileUploadArea.classList.add('highlight');
+            }
+
+            function unhighlight() {
+                fileUploadArea.classList.remove('highlight');
+            }
+
+            fileUploadArea.addEventListener('drop', handleDrop, false);
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                fileInput.files = files;
+                handleFileSelect();
+            }
+
+            function handleFileSelect() {
+                if (fileInput.files.length === 0) return;
+
+                const file = fileInput.files[0];
+                const fileType = file.type;
+                const validTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+
+                // Reset error
+                fileError.style.display = 'none';
+
+                // Validate file type
+                if (!validTypes.includes(fileType)) {
+                    fileError.style.display = 'block';
+                    fileInput.value = '';
+                    return;
+                }
+
+                // Update file preview
+                fileName.textContent = file.name;
+                fileSize.textContent = formatFileSize(file.size);
+
+                // Set icon based on file type
+                if (fileType === 'application/pdf') {
+                    fileTypeIcon.textContent = '📄';
+                    imagePreview.style.display = 'none';
+                } else {
+                    fileTypeIcon.textContent = '🖼️';
+
+                    // Show image preview for images
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+
+                // Show file preview
+                filePreview.style.display = 'block';
+            }
+
+            // Remove file
+            removeFileBtn.addEventListener('click', function () {
+                fileInput.value = '';
+                filePreview.style.display = 'none';
+                imagePreview.style.display = 'none';
+                imagePreview.src = '';
+            });
+
+            // Format file size
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            // Form validation
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Reset errors
+                document.querySelectorAll('.error').forEach(el => el.style.display = 'none');
+
+                let isValid = true;
+
+                // Validate first name
+                if (!document.getElementById('firstName').value.trim()) {
+                    document.getElementById('firstNameError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Validate last name
+                if (!document.getElementById('lastName').value.trim()) {
+                    document.getElementById('lastNameError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Validate email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const emailValue = document.getElementById('email').value.trim();
+                if (!emailValue || !emailRegex.test(emailValue)) {
+                    document.getElementById('emailError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Validate phone (optional)
+                const phoneValue = document.getElementById('phone').value.trim();
+                if (phoneValue && !/^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,4}[-\s.]?[0-9]{1,9}$/.test(phoneValue)) {
+                    document.getElementById('phoneError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Validate payment method
+                if (!document.getElementById('paymentMethod').value) {
+                    document.getElementById('paymentMethodError').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Validate terms
+                if (!document.getElementById('terms').checked) {
+                    document.getElementById('termsError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    // Show processing state
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Processing...';
+
+                    // Simulate form submission (would be an API call in a real app)
+                    setTimeout(function () {
+                        // Hide form and show success message
+                        document.getElementById('enrollment-form').style.display = 'none';
+                        document.getElementById('success-message').style.display = 'block';
+                    }, 1500);
+                }
+            });
+
+            // Add focus and hover effects to inputs
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                const label = document.querySelector(`label[for="${input.id}"]`);
+                if (label) {
+                    input.addEventListener('focus', () => {
+                        label.style.color = '#6b3a6b';
+                    });
+
+                    input.addEventListener('blur', () => {
+                        label.style.color = '';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

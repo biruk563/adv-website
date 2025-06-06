@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced C++ Programming Course - Advanced Language & Computer School</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Theme Variables */
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #fff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --accent-color: #4a6cf7;
+            --accent-light: rgba(74, 108, 247, 0.1);
+            --border-color: #e2e8f0;
+            --card-bg: #fff;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            --footer-bg: #2d3748;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --bottom-nav-bg: #fff;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark Theme */
+        html[data-theme='dark'] {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --accent-color: #5a78ff;
+            --accent-light: rgba(90, 120, 255, 0.2);
+            --border-color: #4a5568;
+            --card-bg: #2d3748;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            --footer-bg: #171923;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(26, 32, 44, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --bottom-nav-bg: #1a202c;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--accent-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+
+        .btn-lg {
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .theme-toggle i {
+            font-size: 18px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), var(--accent-light));
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), var(--accent-light));
+            bottom: -100px;
+            left: -100px;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            background: var(--accent-light);
+            color: var(--accent-color);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .badge i {
+            margin-right: 8px;
+        }
+
+        /* Course Overview */
+        .course-overview {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .overview-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .overview-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .overview-features {
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon {
+            background: var(--accent-light);
+            color: var(--accent-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .feature-text p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .overview-image {
+            position: relative;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .overview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Curriculum Section */
+        .curriculum {
+            padding: 80px 0;
+        }
+
+        .curriculum-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .module {
+            margin-bottom: 40px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .module:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-header {
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .module-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .module.active .module-content {
+            display: block;
+        }
+
+        .module-content ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        .module-content li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .module-content p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Instructors Section */
+        .instructors {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .instructor-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .instructor-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .instructor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instructor-info {
+            padding: 20px;
+        }
+
+        .instructor-info h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .instructor-info p.position {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .instructor-info p.bio {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+        }
+
+        .pricing-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            width: 300px;
+            text-align: center;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-header {
+            background: var(--accent-light);
+            padding: 20px;
+            color: var(--text-primary);
+        }
+
+        .pricing-card.featured .pricing-header {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .pricing-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        .pricing-price span {
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .pricing-content {
+            padding: 20px;
+        }
+
+        .pricing-features {
+            margin-bottom: 20px;
+        }
+
+        .pricing-feature {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .pricing-feature:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-feature i {
+            color: var(--accent-color);
+            margin-right: 5px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .testimonial-content {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 60px;
+            color: var(--accent-color);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-content p {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .faq-question i {
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #3b5bdb 100%);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--accent-color);
+            border-color: white;
+        }
+
+        .cta .btn:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 100px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+
+        .footer-text {
+            color: var(--footer-secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--footer-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #4a5568;
+            color: var(--footer-secondary);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bottom-nav-bg);
+            box-shadow: var(--bottom-nav-shadow);
+            z-index: 999;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .bottom-nav-links {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .bottom-nav-item {
+            text-align: center;
+        }
+
+        .bottom-nav-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .bottom-nav-icon i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .bottom-nav-icon span {
+            font-size: 12px;
+        }
+
+        .bottom-nav-icon:hover,
+        .bottom-nav-icon.active {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-image {
+                height: 300px;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 250px;
+                height: 100vh;
+                background: var(--bg-primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                font-size: 24px;
+            }
+
+            .hero {
+                text-align: center;
+                padding-top: 80px;
+                height: auto;
+                min-height: 60vh;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .hero-badges {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+
+            .pricing-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="../advanced.html" class="logo">Advanced<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="../advanced.html">Home</a></li>
+                    <li><a href="../courses.html">Courses</a></li>
+                    <li><a href="../advanced.html#features">Features</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../advanced.html#contact">Contact</a></li>
+                </ul>
+                <div class="header-right">
+                    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="course-hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Advanced <span>C++</span> Programming</h1>
+                <p>Master modern C++ techniques, performance optimization, and industry best practices to build
+                    high-performance applications, game engines, and systems software.</p>
+
+                <div class="hero-badges">
+                    <div class="badge"><i class="fas fa-clock"></i> 14 Weeks</div>
+                    <div class="badge"><i class="fas fa-signal"></i> Intermediate to Advanced</div>
+                    <div class="badge"><i class="fas fa-users"></i> Limited to 20 Students</div>
+                    <div class="badge"><i class="fas fa-certificate"></i> Certificate Included</div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="enroll.html" class="btn btn-lg">Enroll Now</a>
+                    <a href="#curriculum" class="btn btn-secondary btn-lg">View Curriculum</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Overview Section -->
+    <section id="overview" class="course-overview visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Overview</h2>
+                <p>Everything you need to know about our comprehensive Advanced C++ programming program</p>
+            </div>
+
+            <div class="overview-grid">
+                <div class="overview-content">
+                    <h2>Become a C++ Expert Developer</h2>
+                    <p>This intensive 14-week course is designed for programmers who already have basic C++ knowledge
+                        and want to master advanced techniques used in high-performance applications, game development,
+                        systems programming, and more. You'll learn modern C++ features, optimization strategies, and
+                        industry best practices from experienced professionals.</p>
+
+                    <div class="overview-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Modern C++ Mastery</h4>
+                                <p>Gain deep understanding of modern C++ features (C++11/14/17/20) including smart
+                                    pointers, move semantics, lambdas, and concepts that make your code safer, more
+                                    efficient, and maintainable.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Performance Optimization</h4>
+                                <p>Learn advanced techniques for memory management, cache optimization, SIMD
+                                    instructions, and multithreading to create blazingly fast applications that utilize
+                                    hardware efficiently.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Game & Graphics Programming</h4>
+                                <p>Explore C++ techniques used in game engines, graphics programming, and real-time
+                                    systems, including memory pools, entity-component systems, and efficient rendering
+                                    techniques.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-code-branch"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Template Metaprogramming</h4>
+                                <p>Master advanced template techniques to create flexible, type-safe libraries and
+                                    frameworks that solve complex problems at compile time rather than runtime.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#curriculum" class="btn">Explore Curriculum</a>
+                </div>
+
+                <div class="overview-image">
+                    <img src="https://placeholder.svg?height=400&width=600" alt="Advanced C++ Programming Course">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Section -->
+    <section id="curriculum" class="curriculum visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Curriculum</h2>
+                <p>A comprehensive learning path designed to take you from intermediate to expert C++ developer</p>
+            </div>
+
+            <div class="curriculum-container">
+                <div class="module active">
+                    <div class="module-header">
+                        <div class="module-title">Module 1: Modern C++ Features</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Master the features introduced in C++11, C++14, C++17, and C++20 that transform how we write
+                            C++ code.</p>
+                        <ul>
+                            <li>Smart pointers and RAII for automatic resource management</li>
+                            <li>Move semantics and perfect forwarding</li>
+                            <li>Lambda expressions and functional programming</li>
+                            <li>Variadic templates and fold expressions</li>
+                            <li>Concepts and constraints (C++20)</li>
+                            <li>Project: Modernizing a legacy codebase</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 2: Advanced Memory Management</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Dive deep into memory management techniques for high-performance applications.</p>
+                        <ul>
+                            <li>Custom allocators and memory pools</li>
+                            <li>Memory layout optimization and cache coherence</li>
+                            <li>Alignment and padding considerations</li>
+                            <li>Memory profiling and leak detection</li>
+                            <li>Lock-free data structures</li>
+                            <li>Project: Implementing a high-performance memory allocator</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 3: Template Metaprogramming</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn advanced template techniques to create powerful compile-time abstractions.</p>
+                        <ul>
+                            <li>Template specialization and SFINAE</li>
+                            <li>Type traits and tag dispatching</li>
+                            <li>Compile-time computation and constexpr</li>
+                            <li>Expression templates for domain-specific languages</li>
+                            <li>Policy-based design</li>
+                            <li>Project: Building a type-safe serialization library</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 4: Concurrency & Parallelism</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Master multithreading and parallel programming techniques in modern C++.</p>
+                        <ul>
+                            <li>C++ memory model and atomic operations</li>
+                            <li>Thread synchronization mechanisms</li>
+                            <li>Task-based parallelism with futures and promises</li>
+                            <li>Thread pools and work stealing</li>
+                            <li>Parallel algorithms (C++17) and execution policies</li>
+                            <li>Project: Implementing a parallel image processing application</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 5: Performance Optimization</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Learn techniques to optimize C++ code for maximum performance.</p>
+                        <ul>
+                            <li>Profiling and benchmarking methodologies</li>
+                            <li>Compiler optimizations and intrinsics</li>
+                            <li>SIMD programming with SSE/AVX</li>
+                            <li>Cache-friendly data structures and algorithms</li>
+                            <li>Optimization case studies</li>
+                            <li>Project: Optimizing a performance-critical algorithm</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 6: Game & Graphics Programming</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Explore C++ techniques used in game development and graphics programming.</p>
+                        <ul>
+                            <li>Game engine architecture patterns</li>
+                            <li>Entity-component systems</li>
+                            <li>Physics simulation techniques</li>
+                            <li>Graphics API integration (OpenGL/Vulkan)</li>
+                            <li>Real-time rendering optimizations</li>
+                            <li>Project: Building a simple game engine component</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 7: Design Patterns & Best Practices</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Master advanced design patterns and best practices for large-scale C++ projects.</p>
+                        <ul>
+                            <li>Modern C++ design patterns</li>
+                            <li>API design principles</li>
+                            <li>Error handling strategies</li>
+                            <li>Testing and debugging techniques</li>
+                            <li>Code review best practices</li>
+                            <li>Project: Refactoring and improving a complex codebase</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Module 8: Capstone Project</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <p>Apply everything you've learned to build a significant C++ project of your choice.</p>
+                        <ul>
+                            <li>Project planning and architecture design</li>
+                            <li>Implementation using modern C++ techniques</li>
+                            <li>Performance optimization and profiling</li>
+                            <li>Testing and quality assurance</li>
+                            <li>Documentation and presentation</li>
+                            <li>Capstone options: Game engine, high-performance library, systems tool, or custom project
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructors Section -->
+    <section id="instructors" class="instructors visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Your Instructors</h2>
+                <p>Learn from experienced C++ developers with years of industry experience</p>
+            </div>
+
+            <div class="overview-grid">
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Dr. Michael Stevens">
+                    </div>
+                    <div class="instructor-info">
+                        <h3>Dr. Michael Stevens</h3>
+                        <p class="position">Lead Instructor, C++ Systems Architect</p>
+                        <p class="bio">Dr. Stevens has over 18 years of experience in high-performance C++ development.
+                            He has worked at NVIDIA and Microsoft, developing graphics drivers and performance-critical
+                            systems. He's a regular speaker at CppCon and author of several books on advanced C++
+                            techniques.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://placeholder.svg?height=250&width=250" alt="Elena Petrova">
+                    </div>
+                    <div class="instructor-info">
+                        <h3>Elena Petrova</h3>
+                        <p class="position">Game Engine Developer</p>
+                        <p class="bio">Elena specializes in game engine development and graphics programming. With 12
+                            years of experience at major game studios including Ubisoft and Epic Games, she brings
+                            practical insights into building high-performance real-time systems and optimizing C++ code
+                            for gaming applications.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-medium"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Course Pricing</h2>
+                <p>Flexible payment options to fit your budget</p>
+            </div>
+
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Basic</div>
+                        <div class="pricing-price">$2,199 <span>one-time payment</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Full course access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Course materials</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Certificate of completion</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Community access</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> 1-on-1 mentoring</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Code reviews</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Job placement assistance</div>
+                        </div>
+                        <a href="enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Professional</div>
+                        <div class="pricing-price">$2,799 <span>one-time payment</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Full course access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Course materials</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Certificate of completion</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Community access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> 1-on-1 mentoring (5 sessions)
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Code reviews</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Job placement assistance</div>
+                        </div>
+                        <a href="enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Payment Plan</div>
+                        <div class="pricing-price">$699 <span>per month for 4 months</span></div>
+                    </div>
+                    <div class="pricing-content">
+                        <div class="pricing-features">
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Full course access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Course materials</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Certificate of completion</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> Community access</div>
+                            <div class="pricing-feature"><i class="fas fa-check"></i> 1-on-1 mentoring (2 sessions)
+                            </div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Code reviews</div>
+                            <div class="pricing-feature"><i class="fas fa-times"></i> Job placement assistance</div>
+                        </div>
+                        <a href="enroll.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Student Testimonials</h2>
+                <p>Hear what our graduates have to say about their experience</p>
+            </div>
+
+            <div class="testimonial-container">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"This course took my C++ skills to a completely new level. The deep dive into template
+                            metaprogramming and memory optimization techniques helped me solve performance issues that
+                            had been plaguing our game engine for months. The instructors are true experts who share
+                            real-world insights you won't find in books."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="Jason Kim">
+                        </div>
+                        <div class="author-info">
+                            <h4>Jason Kim</h4>
+                            <p>Senior Engine Programmer at GameCraft Studios</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"As someone who was already working as a C++ developer, I was skeptical about what more I
+                            could learn. This course proved me wrong. The advanced concurrency module alone was worth
+                            the price, and I've been able to implement lock-free data structures that significantly
+                            improved our trading platform's performance."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="Sarah Martinez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Martinez</h4>
+                            <p>C++ Developer at FinTech Solutions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The capstone project was challenging but incredibly rewarding. Building a custom memory
+                            allocator forced me to apply everything I learned about memory management and optimization.
+                            The instructors provided valuable feedback that helped me refine my implementation, and I
+                            now have an impressive portfolio piece that showcases my advanced C++ skills."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://placeholder.svg?height=60&width=60" alt="David Chen">
+                        </div>
+                        <div class="author-info">
+                            <h4>David Chen</h4>
+                            <p>Systems Engineer at TechInnovate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq visible">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our Advanced C++ programming course</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        <span>What level of C++ knowledge is required for this course?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>This course is designed for programmers who already have intermediate C++ knowledge. You
+                            should be comfortable with basic C++ syntax, object-oriented programming concepts, and
+                            standard library containers. You should have experience writing and debugging C++ programs.
+                            If you're a beginner, we recommend taking our Introduction to C++ Programming course first
+                            to build a solid foundation.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How is this course different from other C++ courses?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our Advanced C++ course focuses on topics rarely covered in depth elsewhere: modern C++
+                            features, template metaprogramming, memory optimization, and performance-critical
+                            applications. Rather than just teaching syntax, we emphasize real-world applications in game
+                            development, financial systems, and high-performance computing. Our instructors are industry
+                            veterans who share practical insights and techniques used in production environments.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What development environment will be used?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We primarily use modern C++ compilers (GCC, Clang, and MSVC) and CMake for build management.
+                            Students are free to use their preferred IDE (Visual Studio, CLion, VS Code, etc.). We'll
+                            provide setup instructions for all major platforms. For some modules, we'll use specialized
+                            tools for profiling, memory analysis, and performance benchmarking. All tools used in the
+                            course are either free or have educational licenses available.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Will this course help me prepare for job interviews?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. The course covers advanced C++ topics that are frequently asked about in
+                            interviews for senior developer positions. We include sections on common interview questions
+                            related to memory management, optimization, and C++ language features. The projects you'll
+                            build throughout the course will strengthen your portfolio and demonstrate your expertise.
+                            Additionally, our Professional plan includes mock interviews and personalized feedback to
+                            help you prepare for technical interviews.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What kind of projects will I build during this course?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Throughout the course, you'll work on several projects that apply advanced C++ concepts: a
+                            custom memory allocator, a type-safe serialization library, a parallel image processing
+                            application, and components of a game engine. For the capstone project, you'll have the
+                            option to build a significant C++ application of your choice, such as a high-performance
+                            data structure library, a game physics engine, a compiler component, or another project
+                            aligned with your interests and career goals.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is C++ still relevant in today's tech industry?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>C++ remains one of the most in-demand languages for performance-critical applications. It's
+                            widely used in game development, financial systems, embedded systems, automotive software,
+                            graphics programming, and many other fields where performance matters. Modern C++ (C++11 and
+                            beyond) has evolved significantly, making it more accessible while maintaining its
+                            performance advantages. Advanced C++ developers command high salaries and have excellent job
+                            prospects in specialized fields.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta visible">
+        <div class="container">
+            <h2>Ready to Master Advanced C++?</h2>
+            <p>Enroll today and take your C++ skills to the expert level. Limited spots available for our next cohort
+                starting soon!</p>
+            <a href="enroll.html" class="btn btn-lg">Enroll Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-logo">Advanced<span>.</span></h3>
+                    <p class="footer-text">Advanced is a premier institution offering cutting-edge courses in
+                        programming languages and computer science.</p>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="advanced.html">Home</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="advanced.html#features">Features</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="advanced.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="webdev.html">Web Development</a></li>
+                        <li><a href="data.html">Data Science</a></li>
+                        <li><a href="python.html">Python Programming</a></li>
+                        <li><a href="js.html">Java Programming</a></li>
+                        <li><a href="c++.html">Advanced C++</a></li>
+                        <li><a href="technical.html">Technical Writing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="../privacy.html">Privacy Policy</a></li>
+                        <li><a href="../privacy.html">Terms & Conditions</a></li>
+                        <li><a href="../documentation&sup.html">Documentation</a></li>
+                        <li><a href="../documentation&sup.html">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Advanced Language & Computer School. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-links">
+            <div class="bottom-nav-item">
+                <a href="../advanced.html" class="bottom-nav-icon">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../courses.html" class="bottom-nav-icon active">
+                    <i class="fas fa-book"></i>
+                    <span>Courses</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../about.html" class="bottom-nav-icon">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="../advanced.html#contact" class="bottom-nav-icon">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or use device preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Set initial theme
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        } else if (prefersDark) {
+            htmlElement.setAttribute('data-theme', 'dark');
+            updateThemeIcon('dark');
+        }
+
+        // Toggle theme function
+        function toggleTheme() {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        // Update theme icon
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-moon';
+            } else {
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        // Add event listener to theme toggle button
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Sticky Header
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Module Toggle
+        const moduleHeaders = document.querySelectorAll('.module-header');
+
+        moduleHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const module = header.parentElement;
+                module.classList.toggle('active');
+            });
+        });
+
+        // FAQ Toggle
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initialize page with all sections visible
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('visible');
+        });
+    </script>
+</body>
+
+</html>

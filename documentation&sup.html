@@ -1,0 +1,2199 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation & Support Center - Advanced Language & Computer School</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Theme Variables */
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #fff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --accent-color: #667eea;
+            --accent-secondary: #764ba2;
+            --accent-light: rgba(102, 126, 234, 0.1);
+            --border-color: #e2e8f0;
+            --card-bg: #fff;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 8px 30px rgba(102, 126, 234, 0.15);
+            --footer-bg: #2d3748;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --bottom-nav-bg: #fff;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+        }
+
+        /* Dark Theme */
+        html[data-theme='dark'] {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --accent-color: #7c3aed;
+            --accent-secondary: #a855f7;
+            --accent-light: rgba(124, 58, 237, 0.2);
+            --border-color: #4a5568;
+            --card-bg: #2d3748;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --card-shadow-hover: 0 8px 30px rgba(124, 58, 237, 0.25);
+            --footer-bg: #171923;
+            --footer-text: #e2e8f0;
+            --footer-secondary: #a0aec0;
+            --header-bg: rgba(26, 32, 44, 0.95);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --bottom-nav-bg: #1a202c;
+            --bottom-nav-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+            --success-color: #68d391;
+            --warning-color: #f6ad55;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none !important;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Improved Button Styles */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-secondary), var(--accent-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            box-shadow: none;
+            margin-left: 15px;
+        }
+
+        .btn-secondary::before {
+            background: var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-sm {
+            padding: 10px 24px;
+            font-size: 14px;
+        }
+
+        /* Enhanced Section Animations */
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+
+        /* Improved Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .theme-toggle i {
+            font-size: 18px;
+        }
+
+        /* Enhanced Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--header-bg);
+            box-shadow: var(--header-shadow);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        /* Improved Logo */
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        /* Simplified and Improved Navigation Hover Effects */
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            opacity: 0;
+            transition: all 0.3s ease;
+            border-radius: 25px;
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            font-size: 24px;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-light), transparent);
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+            animation: heroFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1) rotate(180deg);
+                opacity: 0.8;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Enhanced Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            padding-right: 50px;
+            border-radius: 30px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Improved Card Styles */
+        .category-card,
+        .option-card,
+        .resource-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before,
+        .option-card::before,
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover::before,
+        .option-card:hover::before,
+        .resource-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-card:hover,
+        .option-card:hover,
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .support-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .category-icon,
+        .option-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--accent-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-icon,
+        .option-card:hover .option-icon {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .category-icon i,
+        .option-icon i {
+            font-size: 30px;
+            color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-icon i,
+        .option-card:hover .option-icon i {
+            color: white;
+        }
+
+        .category-title,
+        .option-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-title,
+        .option-card:hover .option-title {
+            color: var(--accent-color);
+        }
+
+        .category-description,
+        .option-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-description,
+        .option-card:hover .option-description {
+            color: var(--text-primary);
+        }
+
+        /* Documentation Section */
+        .documentation-section {
+            background: var(--bg-secondary);
+            padding: 80px 0;
+        }
+
+        .doc-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 30px;
+        }
+
+        .doc-sidebar {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            transition: all 0.3s ease;
+        }
+
+        .doc-sidebar:hover {
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .doc-menu-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .doc-menu-title::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            bottom: 0;
+            left: 0;
+        }
+
+        .doc-menu {
+            margin-bottom: 30px;
+        }
+
+        .doc-menu-item {
+            margin-bottom: 15px;
+        }
+
+        .doc-menu-link {
+            display: block;
+            padding: 10px 15px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-menu-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-color), var(--accent-secondary));
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s ease;
+        }
+
+        .doc-menu-link:hover::before,
+        .doc-menu-link.active::before {
+            transform: scaleY(1);
+        }
+
+        .doc-menu-link:hover,
+        .doc-menu-link.active {
+            background: var(--accent-light);
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .doc-menu-link i {
+            margin-right: 10px;
+        }
+
+        .doc-content {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .doc-content:hover {
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .doc-section {
+            margin-bottom: 40px;
+        }
+
+        .doc-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .doc-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .doc-section h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .doc-section:hover h3 {
+            color: var(--accent-color);
+        }
+
+        .doc-section:hover h3::after {
+            width: 80px;
+        }
+
+        .doc-section p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .doc-section:hover p {
+            color: var(--text-primary);
+        }
+
+        .doc-section ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        .doc-section ul li {
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .doc-section:hover ul li {
+            color: var(--text-primary);
+        }
+
+        .doc-section code {
+            background: var(--bg-secondary);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--accent-color);
+        }
+
+        .doc-section pre {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            font-family: monospace;
+            color: var(--text-primary);
+        }
+
+        .doc-section img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .doc-section a {
+            color: var(--accent-color);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .doc-section a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .doc-section a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .doc-section a:hover {
+            color: var(--accent-secondary);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--bg-primary);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            background: var(--card-bg);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .faq-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--accent-light);
+            color: var(--accent-color);
+        }
+
+        .faq-question i {
+            transition: all 0.3s ease;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+            color: var(--accent-color);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+        }
+
+        /* Support Options */
+        .support-options {
+            background: var(--bg-secondary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .option-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .option-icon i {
+            font-size: 24px;
+        }
+
+        /* Support Form */
+        .support-form {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            margin-top: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .support-form:hover::before {
+            transform: scaleX(1);
+        }
+
+        .support-form:hover {
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-control,
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-check-input {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-color);
+        }
+
+        .form-check-label {
+            color: var(--text-secondary);
+        }
+
+        .form-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            color: white;
+            border: none;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: var(--bg-primary);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .resource-card {
+            border-radius: 15px;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .resource-img {
+            height: 160px;
+            overflow: hidden;
+        }
+
+        .resource-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .resource-card:hover .resource-img img {
+            transform: scale(1.1);
+        }
+
+        .resource-content {
+            padding: 20px;
+        }
+
+        .resource-tag {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .resource-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover .resource-title {
+            color: var(--accent-color);
+        }
+
+        .resource-description {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-size: 14px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover .resource-description {
+            color: var(--text-primary);
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .resource-link:hover {
+            color: var(--accent-secondary);
+        }
+
+        .resource-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Improved Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bottom-nav-bg);
+            box-shadow: var(--bottom-nav-shadow);
+            z-index: 999;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .bottom-nav-links {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .bottom-nav-item {
+            text-align: center;
+        }
+
+        .bottom-nav-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 8px 12px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .bottom-nav-icon:hover {
+            color: var(--accent-color);
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .bottom-nav-icon.active {
+            color: var(--accent-color);
+            background: var(--accent-light);
+        }
+
+        .bottom-nav-icon i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .bottom-nav-icon span {
+            font-size: 12px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 100px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+
+        .footer-text {
+            color: var(--footer-secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--footer-secondary);
+            transition: all 0.3s ease;
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #4a5568;
+            color: var(--footer-secondary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .doc-container {
+                grid-template-columns: 1fr;
+            }
+
+            .doc-sidebar {
+                position: static;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 250px;
+                height: 100vh;
+                background: var(--bg-primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+                margin-left: 0;
+            }
+
+            .nav-links a {
+                padding: 10px 20px;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                text-align: center;
+                padding-top: 80px;
+                height: auto;
+                min-height: 40vh;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .doc-content {
+                padding: 20px;
+            }
+
+            .support-form {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+
+            .category-card,
+            .option-card {
+                padding: 20px;
+            }
+
+            .doc-section h3 {
+                font-size: 20px;
+            }
+        }
+
+        /* Animation delays for staggered effects */
+        .category-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .category-card:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .category-card:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .category-card:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .option-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .option-card:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .option-card:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .resource-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .resource-card:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .resource-card:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .resource-card:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .resource-card:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
+        .resource-card:nth-child(6) {
+            transition-delay: 0.6s;
+        }
+
+        .faq-item:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .faq-item:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .faq-item:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .faq-item:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .faq-item:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
+        .faq-item:nth-child(6) {
+            transition-delay: 0.6s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="advanced.html" class="logo">Advanced<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="advanced.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="advanced.html#contact">Contact</a></li>
+                </ul>
+                <div class="header-right">
+                    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="support-hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Documentation & <span>Support</span></h1>
+                <p>Find answers, learn about our courses, and get the help you need</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section id="search-section" class="search-section visible">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search for documentation, FAQs, or support...">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="support-categories">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="category-title">Documentation</h3>
+                    <p class="category-description">Comprehensive guides and documentation for all our courses and
+                        services.</p>
+                    <a href="#documentation" class="btn btn-sm">Browse Docs</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 class="category-title">FAQs</h3>
+                    <p class="category-description">Find answers to commonly asked questions about our courses and
+                        policies.</p>
+                    <a href="#faq" class="btn btn-sm">View FAQs</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="category-title">Support</h3>
+                    <p class="category-description">Get help from our support team through various channels.</p>
+                    <a href="#support" class="btn btn-sm">Get Support</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3 class="category-title">Resources</h3>
+                    <p class="category-description">Download useful resources, templates, and study materials.</p>
+                    <a href="#resources" class="btn btn-sm">View Resources</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="documentation" class="documentation-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Documentation</h2>
+                <p>Comprehensive guides to help you make the most of our courses and services</p>
+            </div>
+
+            <div class="doc-container">
+                <div class="doc-sidebar">
+                    <h3 class="doc-menu-title">Categories</h3>
+                    <ul class="doc-menu">
+                        <li class="doc-menu-item">
+                            <a href="#getting-started" class="doc-menu-link active">
+                                <i class="fas fa-play-circle"></i> Getting Started
+                            </a>
+                        </li>
+                        <li class="doc-menu-item">
+                            <a href="#course-guides" class="doc-menu-link">
+                                <i class="fas fa-book-open"></i> Course Guides
+                            </a>
+                        </li>
+                        <li class="doc-menu-item">
+                            <a href="#student-portal" class="doc-menu-link">
+                                <i class="fas fa-user-graduate"></i> Student Portal
+                            </a>
+                        </li>
+                        <li class="doc-menu-item">
+                            <a href="#payment-billing" class="doc-menu-link">
+                                <i class="fas fa-credit-card"></i> Payment & Billing
+                            </a>
+                        </li>
+                        <li class="doc-menu-item">
+                            <a href="#certificates" class="doc-menu-link">
+                                <i class="fas fa-certificate"></i> Certificates
+                            </a>
+                        </li>
+                        <li class="doc-menu-item">
+                            <a href="#technical-issues" class="doc-menu-link">
+                                <i class="fas fa-wrench"></i> Technical Issues
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h3 class="doc-menu-title">Popular Docs</h3>
+                    <ul class="doc-menu">
+                        <li class="doc-menu-item">
+                            <a href="#" class="doc-menu-link">
+                                <i class="fas fa-file-alt"></i> Course Registration Guide
+                            </a>
+                        </li>
+                        <li class="doc-menu-item">
+                            <a href="#" class="doc-menu-link">
+                                <i class="fas fa-file-alt"></i> Student Portal Tutorial
+                            </a>
+                        </li>
+                        <li class="doc-menu-item">
+                            <a href="#" class="doc-menu-link">
+                                <i class="fas fa-file-alt"></i> Payment Methods
+                            </a>
+                        </li>
+                        <li class="doc-menu-item">
+                            <a href="#" class="doc-menu-link">
+                                <i class="fas fa-file-alt"></i> Certificate Verification
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="doc-content">
+                    <div id="getting-started" class="doc-section">
+                        <h3>Getting Started with Advanced</h3>
+                        <p>Welcome to Advanced Language & Computer School! This guide will help you get started with our
+                            platform and make the most of your learning experience.</p>
+
+                        <h4>Creating Your Account</h4>
+                        <p>To access our courses and resources, you'll need to create an account:</p>
+                        <ol>
+                            <li>Visit our homepage at <a href="advanced.html">advancedschool.com</a></li>
+                            <li>Click on the "Sign Up" button in the top right corner</li>
+                            <li>Fill in your personal information and create a password</li>
+                            <li>Verify your email address by clicking the link sent to your inbox</li>
+                            <li>Complete your profile by adding additional information</li>
+                        </ol>
+
+                        <h4>Browsing Courses</h4>
+                        <p>Once your account is set up, you can browse our course catalog:</p>
+                        <ul>
+                            <li>Use the search bar to find specific courses</li>
+                            <li>Filter courses by category, level, or duration</li>
+                            <li>Click on a course to view detailed information</li>
+                            <li>Read course descriptions, prerequisites, and student reviews</li>
+                        </ul>
+
+                        <h4>Enrolling in a Course</h4>
+                        <p>When you find a course you're interested in:</p>
+                        <ol>
+                            <li>Click the "Enroll Now" button on the course page</li>
+                            <li>Select your preferred payment method</li>
+                            <li>Complete the payment process</li>
+                            <li>Access your course immediately after enrollment</li>
+                        </ol>
+
+                        <p>For more detailed information, check out our <a href="#">Course Registration Guide</a>.</p>
+                    </div>
+
+                    <div id="course-guides" class="doc-section">
+                        <h3>Course Guides</h3>
+                        <p>Our course guides provide detailed information about each course, including curriculum,
+                            learning objectives, and requirements.</p>
+
+                        <h4>Programming Courses</h4>
+                        <ul>
+                            <li><a href="courses/python.html">Python Programming Fundamentals</a></li>
+
+                            <li><a href="courses/c++.html">Advanced C++ Programming</a></li>
+                            <li><a href="courses/webdev.html">Web Development with HTML, CSS & JavaScript</a></li>
+                            <li><a href="courses/fullstack.html">Full Stack Development with MERN</a></li>
+                        </ul>
+
+                        <h4>Language Courses</h4>
+                        <ul>
+                            <li><a href="courses/business.html">Business English</a></li>
+                            <li><a href="courses/spanish.html">Spanish for Beginners</a></li>
+                            <li><a href="courses/mandarin.html">Mandarin Chinese Fundamentals</a></li>
+                        </ul>
+
+                        <h4>Course Structure</h4>
+                        <p>Each course typically includes:</p>
+                        <ul>
+                            <li>Video lectures and presentations</li>
+                            <li>Reading materials and resources</li>
+                            <li>Practical exercises and assignments</li>
+                            <li>Quizzes and assessments</li>
+                            <li>Discussion forums for student interaction</li>
+                            <li>Final projects or examinations</li>
+                        </ul>
+
+                        <p>For specific information about a course, please refer to its individual guide.</p>
+                    </div>
+
+                    <div id="student-portal" class="doc-section">
+                        <h3>Student Portal Guide</h3>
+                        <p>The Student Portal is your central hub for managing your courses, tracking progress, and
+                            accessing resources.</p>
+
+                        <h4>Accessing the Student Portal</h4>
+                        <p>To access the Student Portal:</p>
+                        <ol>
+                            <li>Log in to your account</li>
+                            <li>Click on "My Dashboard" in the navigation menu</li>
+                            <li>You'll be directed to your personalized Student Portal</li>
+                        </ol>
+
+                        <h4>Portal Features</h4>
+                        <p>The Student Portal includes the following features:</p>
+                        <ul>
+                            <li><strong>My Courses:</strong> Access your enrolled courses</li>
+                            <li><strong>Progress Tracker:</strong> Monitor your learning progress</li>
+                            <li><strong>Calendar:</strong> View upcoming classes and deadlines</li>
+                            <li><strong>Messages:</strong> Communicate with instructors and peers</li>
+                            <li><strong>Resources:</strong> Access course materials and additional resources</li>
+                            <li><strong>Grades:</strong> View your assessment results</li>
+                            <li><strong>Certificates:</strong> Access and download your earned certificates</li>
+                            <li><strong>Account Settings:</strong> Manage your profile and preferences</li>
+                        </ul>
+
+                        <p>For a detailed walkthrough of the Student Portal, watch our <a href="#">video tutorial</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our courses, policies, and services</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I enroll in a course?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To enroll in a course, browse our course catalog, select the course you're interested in, and
+                            click the "Enroll Now" button. Follow the prompts to complete the registration and payment
+                            process. Once enrolled, you'll have immediate access to the course materials.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept various payment methods including credit/debit cards (Visa, MasterCard, American
+                            Express), PayPal, bank transfers, and in some cases, payment plans. All transactions are
+                            secure and encrypted to protect your financial information.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I get a refund if I'm not satisfied with a course?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer a 14-day money-back guarantee for most of our courses. If you're not satisfied
+                            with the course content, you can request a refund within 14 days of enrollment, provided you
+                            haven't completed more than 30% of the course. For more details, please refer to our Refund
+                            Policy.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long do I have access to a course after enrollment?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once enrolled, you have lifetime access to the course materials. This means you can revisit
+                            the content at any time, even after completing the course. However, some courses may have
+                            time-limited components such as live sessions or instructor feedback periods.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer certificates upon course completion?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we provide certificates of completion for all our courses. Once you've successfully
+                            completed all the required components of a course, including assignments and assessments,
+                            you'll receive a digital certificate that you can download, print, or share online. Our
+                            certificates are recognized by many employers and institutions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What are the technical requirements for taking online courses?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For most courses, you'll need a computer or tablet with a reliable internet connection, a
+                            modern web browser (Chrome, Firefox, Safari, or Edge), and speakers or headphones. Some
+                            programming courses may require specific software installations, which will be detailed in
+                            the course prerequisites. For optimal experience, we recommend a broadband internet
+                            connection with at least 5 Mbps download speed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Options Section -->
+    <section id="support" class="support-options">
+        <div class="container">
+            <div class="section-title">
+                <h2>Support Options</h2>
+                <p>Get help from our support team through various channels</p>
+            </div>
+
+            <div class="options-container">
+                <div class="option-card">
+                    <div class="option-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="option-title">Email Support</h3>
+                    <p class="option-description">Send us an email and we'll respond within 24 hours on business days.
+                    </p>
+                    <p><strong>Email:</strong> support@advancedschool.com</p>
+                    <p><strong>Hours:</strong> Monday-Friday, 9am-6pm EST</p>
+                </div>
+
+                <div class="option-card">
+                    <div class="option-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3 class="option-title">Phone Support</h3>
+                    <p class="option-description">Call our support team for immediate assistance with urgent matters.
+                    </p>
+                    <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p><strong>Hours:</strong> Monday-Friday, 9am-5pm EST</p>
+                </div>
+
+                <div class="option-card">
+                    <div class="option-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="option-title">Live Chat</h3>
+                    <p class="option-description">Chat with our support team in real-time for quick answers to your
+                        questions.</p>
+                    <p><strong>Availability:</strong> Monday-Friday, 9am-8pm EST</p>
+                    <a href="#" class="btn btn-sm">Start Chat</a>
+                </div>
+            </div>
+
+            <div class="support-form">
+                <h3 class="form-title">Submit a Support Ticket</h3>
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class="form-label">Category</label>
+                        <select id="category" name="category" class="form-select" required>
+                            <option value="">Select a category</option>
+                            <option value="technical">Technical Issue</option>
+                            <option value="billing">Billing & Payments</option>
+                            <option value="course">Course Content</option>
+                            <option value="account">Account Access</option>
+                            <option value="certificate">Certificates</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" id="priority" name="priority" class="form-check-input">
+                            <label for="priority" class="form-check-label">Mark as urgent</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="form-submit">Submit Ticket</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Resources</h2>
+                <p>Download useful resources, templates, and study materials</p>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://placeholder.svg?height=160&width=300" alt="Student Handbook">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-tag">Guide</span>
+                        <h3 class="resource-title">Student Handbook</h3>
+                        <p class="resource-description">Comprehensive guide to policies, procedures, and resources for
+                            students.</p>
+                        <a href="#" class="resource-link">Download PDF <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://placeholder.svg?height=160&width=300" alt="Course Catalog">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-tag">Catalog</span>
+                        <h3 class="resource-title">Course Catalog 2024</h3>
+                        <p class="resource-description">Complete listing of all courses offered with detailed
+                            descriptions.</p>
+                        <a href="#" class="resource-link">Download PDF <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://placeholder.svg?height=160&width=300" alt="Programming Cheat Sheets">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-tag">Cheat Sheets</span>
+                        <h3 class="resource-title">Programming Cheat Sheets</h3>
+                        <p class="resource-description">Quick reference guides for various programming languages.</p>
+                        <a href="#" class="resource-link">Download ZIP <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://placeholder.svg?height=160&width=300" alt="Language Learning Templates">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-tag">Templates</span>
+                        <h3 class="resource-title">Language Learning Templates</h3>
+                        <p class="resource-description">Vocabulary and grammar practice templates for language learners.
+                        </p>
+                        <a href="#" class="resource-link">Download ZIP <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://placeholder.svg?height=160&width=300" alt="Study Planner">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-tag">Tool</span>
+                        <h3 class="resource-title">Study Planner Template</h3>
+                        <p class="resource-description">Customizable study planner to help you organize your learning
+                            schedule.</p>
+                        <a href="#" class="resource-link">Download Excel <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://placeholder.svg?height=160&width=300" alt="Career Resources">
+                    </div>
+                    <div class="resource-content">
+                        <span class="resource-tag">Career</span>
+                        <h3 class="resource-title">Career Resources Pack</h3>
+                        <p class="resource-description">Resume templates, interview tips, and career guidance materials.
+                        </p>
+                        <a href="#" class="resource-link">Download ZIP <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-logo">Advanced<span>.</span></h3>
+                    <p class="footer-text">Advanced is a premier institution offering cutting-edge courses in
+                        programming languages and computer science.</p>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="advanced.html">Home</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="advanced.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="courses/webdev.html">Web Development</a></li>
+                        <li><a href="courses/data.html">Data Science</a></li>
+                        <li><a href="courses/mobile.html">Mobile App Development</a></li>
+                        <li><a href="courses/business.html">Business English</a></li>
+                        <li><a href="courses/technical.html">Technical Writing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html#faq">FAQ</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="privacy.html">Terms & Conditions</a></li>
+                        <li><a href="documentation&sup.html">Documentation</a></li>
+                        <li><a href="documentation&sup.html">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Advanced Language & Computer School. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-links">
+            <div class="bottom-nav-item">
+                <a href="advanced.html" class="bottom-nav-icon">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="courses.html" class="bottom-nav-icon">
+                    <i class="fas fa-book"></i>
+                    <span>Courses</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="about.html" class="bottom-nav-icon">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </div>
+            <div class="bottom-nav-item">
+                <a href="advanced.html#contact" class="bottom-nav-icon">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        } else if (prefersDark) {
+            htmlElement.setAttribute('data-theme', 'dark');
+            updateThemeIcon('dark');
+        }
+
+        function toggleTheme() {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-moon';
+            } else {
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Sticky Header
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
+
+                // Close all other answers
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                });
+
+                // Toggle current answer
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        // Documentation Menu
+        const docLinks = document.querySelectorAll('.doc-menu-link');
+
+        docLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                // Update active link
+                docLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Scroll to section
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll Animation
+        function checkSections() {
+            const sections = document.querySelectorAll('section');
+            const triggerBottom = window.innerHeight * 0.8;
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < triggerBottom) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkSections);
+        window.addEventListener('load', checkSections);
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navLinks.classList.remove('active');
+
+                if (this.classList.contains('bottom-nav-icon')) {
+                    document.querySelectorAll('.bottom-nav-icon').forEach(icon => {
+                        icon.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initialize page
+        document.querySelector('section').classList.add('visible');
+
+        // Add floating particles to hero section
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: var(--accent-color);
+                border-radius: 50%;
+                pointer-events: none;
+                opacity: 0.6;
+                animation: float 6s linear infinite;
+            `;
+
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+
+            document.querySelector('.hero').appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 6000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 500);
+
+        // Add CSS for particle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0% {
+                    transform: translateY(100vh) rotate(0deg);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 0.6;
+                }
+                90% {
+                    opacity: 0.6;
+                }
+                100% {
+                    transform: translateY(-100px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
